@@ -1,0 +1,318 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usetheme[]{Malmoe}
+\usecolortheme{seahorse}
+\usefonttheme{professionalfonts}
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={PRESENTACIÓN DEL DIPLOMADO},
+  pdfauthor={Dr.~José Gallardo Matus},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\newcommand{\columnsbegin}{\begin{columns}}
+\newcommand{\columnsend}{\end{columns}}
+
+\title{PRESENTACIÓN DEL DIPLOMADO}
+\subtitle{Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje
+Automático para la Acuicultura.}
+\author{Dr.~José Gallardo Matus}
+\date{30 March 2023}
+\institute{Pontificia Universidad Católica de Valparaíso}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{PLAN DE LA CLASE INAUGURAL}
+\protect\hypertarget{plan-de-la-clase-inaugural}{}
+
+\begin{itemize}
+\item
+  Palabras de bienvenida.
+\item
+  Presentación de los participantes.
+\item
+  Revisión programa del diplomado.
+\item
+  Lectura condiciones AEA abierta.
+\item
+  Habilitación recursos de comunicación y aprendizaje.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{PALABRAS DE BIENVENIDA}
+\protect\hypertarget{palabras-de-bienvenida}{}
+
+\textbf{Dr.~José Gallardo}\\
+Director del Diplomado.
+
+\begin{itemize}
+\item
+  \textbf{Programa consolidado}\\
+  1ra a 3ra versión: 67 graduados.\\
+  4ta versión: 7 matriculados.
+\item
+  \textbf{Excelencia académica}\\
+  PUCV Acreditada por 7 años (todas las áreas).\\
+  Profesores con Doctorado.\\
+  Vinculación permanente con la industria.\\
+  Doctorado en Acuicultura acreditado por 5 años: 92 graduados.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{PRESENTACIÓN DE LOS PARTICIPANTES}
+\protect\hypertarget{presentaciuxf3n-de-los-participantes}{}
+
+\includegraphics[width=1\linewidth]{Welcome}
+
+\end{frame}
+
+\begin{frame}{PROFESORES Y AYUDANTES DIPLOMADO}
+\protect\hypertarget{profesores-y-ayudantes-diplomado}{}
+
+\textbf{Dr.~José Gallardo Matus}\\
+Profesor de genética y genómica aplicada\\
+Doctor en Ciencias\\
+Profesor adjunto PUCV
+
+\textbf{Dr.~María Angélica Rueda}\\
+Profesora de modelamiento predictivo\\
+Doctora en Ciencias Agropecuarias\\
+Investigadora postdoctoral PUCV
+
+\textbf{Mag. Paz Caballero}\\
+Coordinadora postulación y matrículas.
+
+\end{frame}
+
+\begin{frame}{OBJETIVOS DEL DIPLOMADO}
+\protect\hypertarget{objetivos-del-diplomado}{}
+
+Al finalizar el Diplomado los alumnos serán capaces de:
+
+• Aplicar técnicas avanzadas de análisis de datos, inferencia
+estadística y modelamiento predictivo con aprendizaje automático
+(machine learning), para extraer información valiosa de datos
+relacionados a la acuicultura.
+
+• Seleccionar y utilizar modelos estadísticos apropiados para el
+análisis de datos de acuicultura, incluyendo modelos lineales, no
+lineales y multivariados.
+
+• Comunicar y presentar sus resultados de análisis de manera clara y
+atractiva mediante el uso de reportes dinámicos generados con Rmarkdown.
+
+• Trabajar en un ambiente de investigación reproducible utilizando
+GitHub para mantener un control riguroso de versiones y documentación de
+sus proyectos.
+
+• Adoptar herramientas basadas en inteligencia artificial para mejorar
+la eficiencia y la precisión de sus análisis de datos.
+
+\end{frame}
+
+\begin{frame}{CONTENIDOS}
+\protect\hypertarget{contenidos}{}
+
+\begin{itemize}
+\item
+  \textbf{UNIDAD 1. Investigación reproducible y análisis exploratorio
+  de datos.}\\
+  \emph{Palabras clave: R, Rstudio, Rmarkdown, Github, variables
+  aleatorias, distribución de probabilidad, análisis exploratorio de
+  datos.}
+\item
+  \textbf{UNIDAD 2. Inferencia estadística y pruebas de hipótesis con
+  R.}\\
+  \emph{Palabras clave: Parámetro, estadístico, correlación,
+  permutación, combinación, inferencia estadística, contraste de
+  hipótesis y análisis de sobrevivencia.}
+\item
+  \textbf{UNIDAD 3. Modelamiento predictivo con aprendizaje automático.
+  }\\
+  \emph{Palabras clave: Aprendizaje automático, algoritmos de regresión
+  y clasificación, entrenamiento y testeo de modelos, algoritmo de
+  regresión lineal simple y múltiple, algoritmo de regresión logística,
+  algoritmos de agrupamiento y de reducción de dimensionalidad (PCA).}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{EVALUACIÓN DEL DIPLOMADO}
+\protect\hypertarget{evaluaciuxf3n-del-diplomado}{}
+
+\begin{itemize}
+\item
+  La evaluación del diplomado consiste en el desarrollo de un proyecto
+  personal de análisis de datos de acuicultura con R.
+\item
+  Se dará énfasis a que los alumnos resuelvan un problema de acuicultura
+  usando datos de su propio trabajo o investigación.
+\item
+  El trabajo se desarrolla en dos etapas, la primera pondera un 40\% y
+  la segunda un 60\% de la nota final.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{CONDICIONES DE APROBACIÓN DEL DIPLOMADO}
+\protect\hypertarget{condiciones-de-aprobaciuxf3n-del-diplomado}{}
+
+\begin{itemize}
+\item
+  \textbf{Nota mínima}: 4,0 en escala de 1-7 con 60\% de exigencia.
+\item
+  \textbf{Asistencia a clases sincrónicas}: 80\%. Esto es independiente
+  de que las calificaciones parciales o totales sean mayores de 4,0.
+\item
+  \textbf{Plazo de entrega de reportes}: No entregar los reportes en los
+  plazos establecidos para ello será calificado con la nota mínima
+  (1,0).
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{REQUISITOS}
+\protect\hypertarget{requisitos}{}
+
+\begin{itemize}
+\item
+  \textbf{Título}: Título profesional o licenciatura.
+\item
+  \textbf{Programación básica con R}: Deseable pero no es excluyente.\\
+  Alumnos sin experiencia previa deben considerar 4 horas de estudio
+  adicional por semana para alcanzar nivel avanzada de los objetivos de
+  aprendizaje.
+\item
+  \textbf{Inglés}: Los softwares R, Rstudio, Rmarkdown, GitHub, Posit
+  cloud y todos los paquetes de análisis estadístico que se usarán en el
+  curso solo están disponibles en inglés. Alumnos sin competencias de
+  lectura en inglés no deberían tomar el curso.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{CONDICIONES DE OPERACIÓN}
+\protect\hypertarget{condiciones-de-operaciuxf3n}{}
+
+\begin{itemize}
+\item
+  \textbf{Nombre de la actividad de extensión académica:}\\
+  ANÁLISIS DE DATOS CON R YMODELAMIENTO PREDICTIVO CON APRENDIZAJE
+  AUTOMÁTICO (MACHINE LEARNING) PARA LA ACUICULTURA.
+\item
+  \textbf{Resolución:}\\
+  27/2023.
+\item
+  \textbf{Fecha de ejecución:}\\
+  INICIO: 01/04/2023 TÉRMINO: 31/07/2023
+\item
+  \textbf{Consultas, sugerencias y reclamos del curso:}
+  \href{mailto:acuicultura@pucv.cl}{\nolinkurl{acuicultura@pucv.cl}}\\
+  \href{mailto:oct@pucv.cl}{\nolinkurl{oct@pucv.cl}}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{RECURSOS DE APRENDIZAJE Y COMUNICACIÓN}
+\protect\hypertarget{recursos-de-aprendizaje-y-comunicaciuxf3n}{}
+
+\begin{itemize}
+\item
+  \textbf{Material docente}: Diapositivas de clases, videos, guías de
+  aprendizaje y códigos de programación para el análisis de datos con R
+  disponibles en Drive (Debe respaldar para uso propio).
+\item
+  \textbf{SLACK}: Foro de comunicación y preguntas.
+\item
+  \textbf{R}: Acceso a versión open source en la nube.
+\item
+  \textbf{Rstudio y Posit cloud}: Acceso a espacio de trabajo
+  Posit.cloud por 5 meses, debe respaldar para uso propio.
+\item
+  \textbf{Github}: Acceso a versión gratuita.
+\end{itemize}
+
+\end{frame}
+
+\end{document}
