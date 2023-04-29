@@ -65,7 +65,7 @@ Algunos ejemplos incluyen:
 
 - La identificación de enfermedades
 
-- El modelado de sistemas de acuicultura 
+- El modelado de sistemas de manejo en acuicultura [**Paper**](https://drive.google.com/file/d/1R2CTpb7wA8pJsEuFras4_k9jRcXekAjU/view?usp=share_link)
 
 - La predicción de la demanda del mercado.
 
