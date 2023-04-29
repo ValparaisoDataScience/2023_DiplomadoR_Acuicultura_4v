@@ -61,13 +61,14 @@ La IA se está utilizando cada vez más en la acuicultura para mejorar la produc
 
 Algunos ejemplos incluyen:
 
-- El monitoreo de la calidad del agua 
+- Estimación de biomasa  [**aquafalcon**](https://www.aquafalcon.com/)
 
-- La identificación de enfermedades
+- Diagnóstico temprano de enfermedades [**FishByte**](https://www.mundoacuicola.cl/new/aplicacion-para-el-diagnostico-temprano-de-enfermedades-del-salmon-comienza-su-fase-de-validacion-final/)
 
 - El modelado de sistemas de manejo en acuicultura [**Paper**](https://drive.google.com/file/d/1R2CTpb7wA8pJsEuFras4_k9jRcXekAjU/view?usp=share_link)
 
-- La predicción de la demanda del mercado.
+- La predicción de crecimiento [**Paper**](https://drive.google.com/file/d/1V-5JT0tWspajbGdEY8sc2FUGktT-1k4p/view?usp=share_link)
+ 
 
 # ¿QUÉ ES GPT?
 
