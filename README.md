@@ -24,7 +24,7 @@ Al finalizar el Diplomado los alumnos serán capaces de:
 
 **PROFESORES:**  
 
-[**JOSÉ ANDRÉS GALLARDO MATUS**](https://github.com/DrJoseGallardo)      
+[**JOSÉ ANDRÉS GALLARDO MATUS**](https://genomics.pucv.cl)      
 Doctor en Ciencias por la Universidad de Chile, Chile.  
 Biólogo Marino por la Universidad Católica de la Santísima Concepción, Chile.  
 Profesor adjunto de la Pontificia Universidad Católica de Valparaíso, Chile.  
