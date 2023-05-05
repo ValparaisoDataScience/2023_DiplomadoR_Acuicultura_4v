@@ -1,12 +1,12 @@
-# ----------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
 # Clase 05 - Script Solución ejercicios para manipulación de datos con tidyr y dplyr
 # Dr. José Gallardo Matus
 # 18 abril 2023
 # Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.
 
-# ----------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------------
 
-# Habilite librerías
+# Habilite paquetes
 library(readxl) # Para importar datos a R
 
 library(dplyr) # Para manipular datos

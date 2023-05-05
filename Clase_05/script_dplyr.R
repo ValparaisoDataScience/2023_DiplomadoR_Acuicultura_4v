@@ -1,14 +1,14 @@
-# ----------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------
 # Clase 05 - Script Manipulación de datos con tidyr y dplyr
 # Dr. José Gallardo Matus, Dra. María Angélica Rueda, Ing. Carlos Gutierrez
 # 18 abril 2023
 # Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.
-# ----------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------
 
 
 # Lectura recomendada https://es.r4ds.hadley.nz/
   
-# Habilita librerías
+# Habilita paquetes
 library(readxl) # Para importar datos a R
 
 library(dplyr) # Para manipular datos
@@ -17,7 +17,7 @@ library(ggplot2) # Para hacer gráficos
 
 library(tidyr) # Para manipular datos
 
-# LIBRERÍA DPLYR: EL OPERADOR PIPE (TUBERÍA).
+# PAQUETE DPLYR: EL OPERADOR PIPE (TUBERÍA).
 
 # dplyr usa el operador pipe %>% como una tubería para enlazar un data.frame con una o más funciones.
 

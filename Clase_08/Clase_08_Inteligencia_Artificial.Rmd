@@ -1,0 +1,132 @@
+---
+title: "CLASE 08 - INTELIGENCIA ARTIFICIAL"
+author: "Dra. María Angélica Rueda Calderón & Dr. José Gallardo Matus"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  beamer_presentation:
+    theme: Malmoe
+    colortheme: seahorse
+    fonttheme: professionalfonts
+    includes:
+      in_header: mystyle.tex
+  slidy_presentation: default
+  ioslides_presentation: default
+subtitle: Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje
+  Automático para la Acuicultura.
+institute: Pontificia Universidad Católica de Valparaíso
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(zoo)
+library(gridExtra)
+```
+
+# PLAN DE LA CLASE
+
+## **1.- Introducción**
+    
+- ¿Qué es inteligencia artificial?
+- ¿Qué es GPT?
+- ¿Cómo se desarrolló GPT?
+- IA usando Platform, Chat open AI y RStudio
+- ¿Cómo sirve la IA para análisis en ciencias de datos?
+
+## **2). Práctica con R y Rstudio cloud.**
+
+- Realizar manipulación de datos usando IA.
+- Realizar gráficas avanzadas con ggplot2 desde interface de IA.
+
+# ¿CUÁNDO FUERON LOS INICIOS DE LA INTELIGENCIA ARTIFICIAL (IA)?
+
+- La inteligencia artificial (IA) como campo de estudio y desarrollo fue iniciada por varios pioneros de la informática y la matemática en la década de 1950. 
+
+- Entre los primeros contribuyentes destacan nombres como John McCarthy, Marvin Minsky, Claude Shannon, Allen Newell y Herbert Simon. Sin embargo, es importante destacar que la IA es el resultado de un esfuerzo colectivo de muchos investigadores y científicos a lo largo de varias décadas.
+
+
+# ¿QUÉ ES INTELIGENCIA ARTIFICIAL (IA)?
+
+La inteligencia artificial (IA) es un campo de la informática que se enfoca en el desarrollo de algoritmos y sistemas que pueden realizar tareas que típicamente requieren inteligencia humana, como el aprendizaje, la percepción, el razonamiento y la resolución de problemas.
+
+
+# EJEMPLOS DE LA APLICACIÓN DE LA IA EN ACUICULTURA
+
+La IA se está utilizando cada vez más en la acuicultura para mejorar la producción, la eficiencia y la sostenibilidad. 
+
+Algunos ejemplos incluyen:
+
+- Estimación de biomasa  [**aquafalcon**](https://www.aquafalcon.com/)
+
+- Diagnóstico temprano de enfermedades [**FishByte**](https://www.mundoacuicola.cl/new/aplicacion-para-el-diagnostico-temprano-de-enfermedades-del-salmon-comienza-su-fase-de-validacion-final/)
+
+- El modelado de sistemas de manejo en acuicultura [**Paper**](https://drive.google.com/file/d/1R2CTpb7wA8pJsEuFras4_k9jRcXekAjU/view?usp=share_link)
+
+- La predicción de crecimiento [**Paper**](https://drive.google.com/file/d/1V-5JT0tWspajbGdEY8sc2FUGktT-1k4p/view?usp=share_link)
+ 
+
+# ¿QUÉ ES GPT?
+
+- **GPT** significa "**G**enerative **P**re-trained **T**ransformer".
+
+- Es una arquitectura de red neuronal desarrollada por [**OpenAI**](https://chat.openai.com/)
+
+- Se enfoca en la generación de lenguaje natural y el procesamiento del lenguaje natural.
+
+- GPT-3 es la versión más reciente de la arquitectura GPT y es una de las redes neuronales más grandes y potentes que existen.
+
+- Ha sido entrenado en una cantidad masiva de datos, lo que le permite realizar tareas sorprendentes como responder preguntas, generar texto creativo, traducir idiomas, entre otras.
+
+# TIPOS DE MODELOS DE IA
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Modelos.png")
+```
+
+# ¿QUÉ ES Platform?
+
+[**Platform OpenAI**](https://platform.openai.com/) es una plataforma en línea que ofrece acceso a modelos de lenguaje de inteligencia artificial, como GPT-3, así como herramientas de desarrollo y recursos de computación para la investigación y el desarrollo de inteligencia artificial.
+
+# ¿QUÉ ES Chat OpenAI?
+
+[**Chat OpenAI**](https://chat.openai.com/) se refiere a un chatbot o asistente virtual que utiliza inteligencia artificial para conversar con los usuarios de manera natural y resolver consultas o preguntas. El Chat OpenAI es un producto de OpenAI.
+
+# IA usando OpenAI Platform
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Platform.png")
+```
+
+# IA usando Chat OpenAI
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Chat_Openai.png")
+```
+
+# IA usando RStudio
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Rstudio_Chat.png")
+```
+# PASOS PARA USAR IA EN RSTUDIO CLOUD 
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Pasos_Rstudio.png")
+```
+
+
+# RESUMEN DE LA CLASE
+
+- Aprendimos sobre que es la IA.
+
+- Usamos interfaces de IA para analizar datos.
+
+- Aplicar técnicas de análisis de datos desde el enfoque de IA.
+
+- Hicimos gráficos ggplot2 usando IA.
+

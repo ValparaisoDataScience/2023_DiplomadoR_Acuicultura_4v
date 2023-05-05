@@ -46,7 +46,7 @@ pre {
 
 **¿Cuál es la diferencia entre variable y dato?**
 
-Las **variables** son las características que se pueden medir en un individuo o en un ambiente y los **datos** son los valores que puede tomar esa variable.
+Las **variables** son las características que se pueden medir en un individuo o en un ambiente y los **datos** u (observaciones) son los valores que puede tomar esa variable.
 
 **¿Qué es una variable aleatoria?**
 
@@ -102,9 +102,9 @@ En la siguiente tabla se muestran varias **funciones clave** para poder observar
 
 ### **¿Cómo puedo simular números aleatorios con distribución normal?**
 
-| **Librería** | **Función**  |  **Descripción** |
+| **Paquete** | **Función**  |  **Descripción** |
 |:----:|:---:|:---:|
-| stats  | **rnorm(n, mean, sd)** | Genera (n) números aleatorios para la distribución normal con promedio (mean) y desviación estandar (sd) |
+| stats  | **rnorm(n, mean, sd)** | Genera (n) números aleatorios para la distribución normal con promedio (mean) y desviación estándar (sd) |
 
 
 ### **Objetivos de aprendizaje**
@@ -114,26 +114,26 @@ Los objetivos de aprendizaje de esta guía son:
 **1**. Importar, observar y predecir variables aleatorias continuas desde datos reales de salmón.
 
 
-## **Ejercicios**
+# **Ejercicios**
 
-### Estudio de caso.
+## Estudio de caso.
 
 En esta guía trabajaremos con datos reales de producción y calidad de salmón Chinook cultivado [Lajoie et al. 2019](https://doi.org/10.1016/j.aquaculture.2019.03.008.)
 
-### **Ejercicio 1.** **Elaborar un Script de R (Archivo .R)**
+# **Ejercicio 1.** **Elaborar un Script de R (Archivo .R)**
 
 Elabore un archivo o file con extensión **.R** usando la barra de herramientas de **Rstudio**. Selecciona **File \> New file \> R script**. Utilice el siguiente ejemplo para completar la información de **metadatos** del script.
 
-    # ----------------------------------------------------------  
+    # -----------------------------------------------------------------------------------------------------------  
     # Clase 02 - Guia Variables Aleatorias continuas.   
     # Su nombre: 
-    # 09 abril 2023. 
+    # 11 abril 2023. 
     # Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.   
-    # ----------------------------------------------------------  
+    # -----------------------------------------------------------------------------------------------------------  
 
 Luego, guarde inmediatamente su script como **script_2_nombre_apellido.R**.
 
-### **Ejercicio 2.** **Configuración de paquetes**
+# **Ejercicio 2.** **Configuración de paquetes**
 
 Debajo del **metadatos** habilite el paquete **readxl** usando la función **library()**. Note que los paquetes **base**, **stats**, **utils** y **graphics** ya están habilitados.
 
@@ -142,13 +142,13 @@ knitr::opts_chunk$set(echo = FALSE)
 library(readxl)
 ```
 
-### **Ejercicio 3.** **datos de salmón Chinook.** 
+# **Ejercicio 3.** **datos de salmón Chinook.** 
 
 El set de datos **Salmon_Data.xlsx** contiene información de diferentes variables de producción y calidad, así como de diferentes factores que influyen en estos rasgos.
 
 Cree un objeto llamado **salmones** e importe el set de datos **Salmon_Data.xlsx** usando la función **read_excel** del paquete **readxl**.
 
-Explore el set de datos algunas funciones de la paquete **{utils}** **head()**, **tail()**, **str()**. Explore con el paquete **{base}** y la función **summary**. 
+Explore el set de datos usando algunas funciones del paquete **{utils}** **head()**, **tail()**, **str()**. Explore con el paquete **{base}** y la función **summary()**. 
 
 ```{r}
 salmones <- read_excel("Salmon_Data.xlsx")
@@ -158,7 +158,7 @@ str(salmones)
 summary(salmones)
 ```
 
-### **Ejercicio 4.** **Transformación a factor**
+# **Ejercicio 4.** **Transformación a factor**
 
 Note que en el ejercicio anterior la variable **Sexo** fue codificada como caracter o texto (chr) en vez de factor. Use la función **as.factor(salmones$Sexo)** para indicar que Sexo es un factor de clasificación. Vuelva a ejecutar los comandos **summary()** y **str()** para comprobar que las variables están adecuadamente codificadas.
 
@@ -170,7 +170,7 @@ summary(salmones)
 str(salmones)
 ```
 
-### **Ejercicio 5.** **Observar el comportamiento de una variable**
+# **Ejercicio 5.** **Observar el comportamiento de una variable**
 
 A partir del set de datos **salmones** elabore un histograma y un boxplot de la variable cuantitativa continua **Weight (g)**. Use las funciones **hist()**, **boxplot()**. Incluya títulos y leyenda de los ejes con los argumentos *col=""*, *main = ""* y *xlab=""*.
 
@@ -187,7 +187,7 @@ boxplot(salmones$`Weight (g)`, col="deepskyblue4", main = "Boxplot Peso", ylab =
 
 ```
 
-### **Ejercicio 6.** **Métricas del set de datos salmones**
+# **Ejercicio 6.** **Métricas del set de datos salmones**
 
 Calcule las siguientes métricas para **Weight (g)**del set de datos: promedio, desviación estándar, rango y cuantiles usando las funciones: **mean()**, **sd()**, **range()** y **quantile()**.
 
@@ -198,7 +198,7 @@ range(salmones$`Weight (g)`)
 quantile(salmones$`Weight (g)`)
 ```
 
-### **Ejercicio 7.** **Función de densidad**
+# **Ejercicio 7.** **Función de densidad**
 
 Usando la función **plot()** elabore:
 
@@ -216,7 +216,7 @@ plot(density(salmones$`Weight (g)`), main="Densidad empírica", xlab="Peso (g)")
 plot(ecdf(salmones$`Weight (g)`), main="Distribución acumulada empírica", xlab="Peso (g)")
 ```
 
-### **Ejercicio 8.** **Crear una función y predecir datos observados**
+# **Ejercicio 8.** **Crear una función y predecir datos observados**
 
 Utilice la función de distribución acumulada empírica **ecdf()** para determinar que proporción de los animales es menor a 1000 g, y que proporción es mayor de 2000 g:
 
@@ -241,7 +241,7 @@ paste("La proporción de animales menores a 1000 g es = ", Fn(1000)*100, "%")
 paste("La proporción de animales mayores a 2000 g es = ", ((1 - Fn(2000))*100), "%")
 ```
 
-### **Ejercicio 9.** **Proporción de datos entorno a la media**
+# **Ejercicio 9.** **Proporción de datos entorno a la media**
 
 En la siguiente figura, la línea roja representa 1 desviación estándar sobre y debajo de la media, mientras que la línea azul representa la media.
 
@@ -275,7 +275,7 @@ paste(((100 - (p1 + p2))), "%")
 # Este valor es muy cercano al 71% teórico de una variable con distribución normal.
 ```
 
-### **Ejercicio 10.** **Diferencias entre Jaulas.**
+# **Ejercicio 10.** **Diferencias entre Jaulas.**
 
 Finalmente, elabore un boxplot para comparar la diferencia de peso entre machos y hembras. Use la formula **boxplot(y ~ x)**, donde y es la variable **Weight (g)** y x es la variable **Net pen**.
 

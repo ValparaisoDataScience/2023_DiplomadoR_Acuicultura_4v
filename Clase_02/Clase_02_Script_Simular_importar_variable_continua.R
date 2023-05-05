@@ -1,10 +1,10 @@
-# ----------------------------------------------------------
-# Clase 02 - Importar y simular variables Aleatorias Continua
+# -------------------------------------------------------------
+# Clase 02 - Importar y simular variables aleatorias continuas
 # Dr. José Gallardo y Dra. María Angélica Rueda Calderón
-# 09 abril 2023
+# 11 abril 2023
 # Diplomado en Análisis de Datos y Modelamiento Predictivo
 # con Aprendizaje Automático para la Acuicultura.
-# ----------------------------------------------------------
+# -------------------------------------------------------------
 
 # ¿Cómo habilitar paquetes?
 
@@ -24,7 +24,7 @@ datos_txt <- read.delim("datos.txt")
 
 # Importa base de datos en formato .csv
 
-datos_csv <- read_csv("datos.csv")
+datos_csv <- read_delim("datos.csv")
 
 # Importa base de datos en formato .xlsx
 

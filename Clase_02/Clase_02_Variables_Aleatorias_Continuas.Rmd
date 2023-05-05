@@ -1,17 +1,18 @@
 ---
 title: "CLASE 02 - VARIABLES ALEATORIAS CONTINUAS"
-subtitle: 'Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.'
-author: Dra. María Angélica Rueda Calderón
-institute: Pontificia Universidad Católica de Valparaíso 
+author: "Dra. María Angélica Rueda Calderón"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-output: 
+output:
   beamer_presentation:
-    theme: "Malmoe"
-    colortheme: "seahorse"
-    fonttheme: "professionalfonts"
+    theme: Malmoe
+    colortheme: seahorse
+    fonttheme: professionalfonts
     includes:
       in_header: mystyle.tex
-      
+  slidy_presentation: default
+subtitle: Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje
+  Automático para la Acuicultura.
+institute: Pontificia Universidad Católica de Valparaíso
 ---
 
 ```{r setup, include=FALSE}
@@ -41,7 +42,7 @@ library(readxl)
 
 - Elaborar un script de R e importar datos desde excel.
 
-- Observar y predecir variable aleatoria con distribución Normal.
+- Observar y predecir variable aleatoria con **distribución normal**.
 
 ## **CONCEPTOS Y DEFINICIONES**
 
@@ -49,16 +50,15 @@ library(readxl)
 Características que se pueden medir u observar en un individuo o en un ambiente: peso, temperatura, sexo, crecimiento, madurez, flotabilidad, rendimiento, sobrevivencia, biomasa cosechada.
 
 2. **Variable aleatoria**  
-Es un número que representa un resultado de un experimento aleatorio. Depende entonces de función matemática o distribución de probabilidad.
-
+Una variable aleatoria es una función que asigna un valor numérico a cada posible resultado de un experimento aleatorio. Según el tipo de variable aleatoria que se este analizando, tendrá una función de probabilidad o función de densidad asociada.
 
 ## **CONCEPTOS Y DEFINICIONES**
 
 3. **Datos u observaciones**  
-Son los valores que puede tomar una variable aleatoria. 6078 gramos, 55 mm, células por mililitro, macho / hembra, 13ºC, Maduro /No maduro, Kg wfe/N, vivo/muerto.
+Son los valores que puede tomar una variable aleatoria. 6,5 Kg, 55 cm, 25 células por mililitro, Sexo= macho o hembra, 13ºC, Lesiones Bacterianas = ausente, leve, mediano, severo; resistencia: Si (vivo) o NO (muerto).
 
 4. **Factor**  
-Usado para identificar tratamientos de un experimento o variables de clasificación. Se usan como *variables independientes o predictoras*, es decir, tienen un efecto sobre una *variable dependiente o respuesta*. Ej. Sexo (niveles: macho o hembra) tiene un efecto sobre nivel de hormonas.
+Usado para identificar tratamientos de un experimento o variables de clasificación. Se podrían usar como **_variables independientes o predictoras_**; es decir, tienen un efecto sobre una *variable dependiente o respuesta*. Ej. **Sexo** (niveles: **_macho_** o **_hembra_**) tiene un efecto sobre nivel de hormonas.
 
 ## **CLASIFICACIÓN DE VARIABLES**
 
@@ -79,7 +79,7 @@ knitr::include_graphics("FxNormal.jpg")
 
 - **hist()** permite hacer un histograma. Cuando aumenta el **n** muestral se perfila una distribución llamada **normal**.    
 
-```{r, echo=FALSE, out.width = 70%', fig.align='center'}
+```{r, echo=FALSE, out.width = '70%', fig.align='center'}
 par(mfrow=c(1,2))
 set.seed(123)
 q<-rnorm(50, 0, 1)
@@ -119,12 +119,12 @@ plot(ecdf(q2),main= "Distribución empírica acumulada.", col="red", cex.lab=1.5
 
 ## **FORMATO CORRECTO PARA IMPORTAR A R**
 
-```{r, echo=FALSE, out.width = '70%', fig.align='center', fig.cap="Formato correcto de archivo excel para que sea importado a R."}
+```{r, echo=FALSE, out.width = '75%', fig.align='center', fig.cap="Formato correcto de archivo excel para que sea importado a R."}
 knitr::include_graphics("Datos.png")
 ```
 
 ## **ERRORES EN FORMATO EXCEL**
-```{r, echo=FALSE, out.width = '70%', fig.align='center', fig.cap="Errores comunes antes de importar a excel."}
+```{r, echo=FALSE, out.width = '75%', fig.align='center', fig.cap="Errores comunes antes de importar a excel."}
 knitr::include_graphics("Errores_1.png")
 ```
 
@@ -135,11 +135,11 @@ knitr::include_graphics("Errores_1.png")
 knitr::include_graphics("Errores.png")
 ```
 
-**Importante:** No colocar comentarios en las celdas de datos. Dejar celdas vacias o usar el simbolo *NA* es preferido cuando hay datos faltantes.
+**Importante:** No colocar comentarios en las celdas de datos. Dejar celdas vacías o usar el símbolo *NA* es preferido cuando hay datos faltantes.
 
 ## **COMO IMPORTAR DATOS A R**
 
-El paquete **readxl** es muy util para importar datos a R. Pero debe tener cuidado con: separador de columnas, decimales y valores faltantes.
+El paquete **readxl** es muy útil para importar datos a R. Pero debe tener cuidado con: separador de columnas, decimales y valores faltantes.
 
 ```{r, echo=TRUE, out.width = '100%', fig.align='center'}
 library(readxl)
@@ -151,17 +151,16 @@ salmon<-read_excel("datos.xlsx",
 
 **Guía de trabajo programación con R en Rstudio.cloud**.
 
-```{r, echo=FALSE, out.width = '80%' }
+```{r, echo=FALSE, out.width = '80%',fig.align='center'}
 knitr::include_graphics("Run.png")
 ```
 
 ## **RESUMEN DE LA CLASE**
 
-- Identificamos  y clasificamos variables.
+- Identificamos y clasificamos variables.
 
 - Observamos la distribución de una variable cuantitativa continua usando histograma y boxplot.
 
 - Predecimos el comportamiento de una variable cuantitativa continua con distribución normal usando funciones de densidad y de distribución enpírica acumulada.
 
-- Es importante identificar la naturaleza que tiene nuestra variable en estudio, y así evitar errores en los análisis estadísticos que llevemos a cabo. No siempres será normal.
-
+- Es importante identificar la naturaleza que tiene nuestra variable en estudio, y así evitar errores en los análisis estadísticos que llevemos a cabo. No siempre tendrá distribución normal.
