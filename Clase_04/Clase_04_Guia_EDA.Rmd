@@ -1,0 +1,314 @@
+---
+title: "Clase 04 - Guía de profundización Análisis exploratorio de datos"
+subtitle:  'Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.'
+author:
+ name: Dr. José A. Gallardo y Dra. María Angélica Rueda.
+ affiliation: Pontificia Universidad Católica de Valparaíso
+ email: <jose.gallardo@pucv.cl>
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: hide
+  word_document: default
+  pdf_document: default
+---
+
+<style>
+#TOC {
+  color: black;
+  font-familiy: Calibri;
+  font-size: 14px;
+  border-color: #708090; 
+}
+body {
+   color: black;
+   font-familiy: Calibri;
+}
+
+pre {
+  color: black;
+  background-color: #F8F8FF;
+}
+# header {
+  color: #800000;
+  font-familiy: Calibri;
+  background-color: #F5F5F5;
+  opacity: 0.8;
+  font-size: 16px;
+}
+</style>
+
+
+## **Introducción**
+
+Los análisis exploratorios de datos son procedimientos que usan los estadísticos para visualizar y explorar los datos de un estudio. Esto les permite investigar la calidad y limpiar los datos previo a la realización de las pruebas estadísticas. Un buen análisis exploratorio de datos permite observar la variación y covariación de los datos, así como establecer modelos básicos de relación e interacción entre las variables bajo estudio.
+
+En los análisis exploratorio de datos el investigador debe iterar entre la generación de algunas preguntas iniciales para explorar sus datos y la visualicación, transformación y modelamiento de sus datos, para luego, usar lo aprendido y volver a generar nuevas preguntas hasta alcanzar un nivel de comprención avanzada de sus datos [**Fuente: R for Data Science**](https://r4ds.had.co.nz/exploratory-data-analysis.html).
+
+## **Objetivos de aprendizaje**
+
+Los objetivos de aprendizaje de esta guía son:
+
+**1**. - Realizar un análisis exploratorio de datos.  
+
+**2**. - Realizar gráficas avanzadas con ggplot2.  
+
+
+## **Paquetes**
+
+**readxl**: Permite importar datos a partir de archivos con formato **.xls** y **.xlsx**
+
+**ggplot2**: Paquete de visualización de datos preferido para realizar gráficas avanzadas con R [ggplot2 book](https://ggplot2-book.org//)).
+
+**psych**: Paquete con un comando simple para realizar histogramas y correlaciones de datos en formato de matriz.
+
+## **Comandos**
+
+A continuación, se presentan algunos comandos que podrían ser usados para resolver los ejercicios de esta guía. Otros, los usará más adelante en el curso y los deberá investigarlos por su propia cuenta. 
+
+**1.-** Realiza una gráfica para observar la interacción de 2 factores sobre una variable respuesta con esta función de la libraría **stats**:
+**interaction.plot()**.
+
+**2.-** Investiga el efecto de uno o más factores sobre una variable respuesta con esta función de la librería **graphics**:
+**plot.design()**.
+
+**3.-** Explora la distribución de frecuencia y correlación de muchas variables continuas con esta función de la librería **psych**:
+**pairs.panels**.
+
+**4.-** Visualiza la variación de tus datos de forma avanzada con ggplot2. Si das los primeros pasos en ggplot2 te sugerimos revisar este capítulo del autor de la librería [Getting started](https://ggplot2-book.org/getting-started.html).
+
+Comparación de algunos comandos de gráficas entre la librería **graphics** y **ggplot2**
+
+| Función  |  graphics |  ggplot2 |
+|---|---|---|
+| Función genérica para graficar  |  plot() | ggplot()  |
+|  Histogramas |  hist() | geom_histogram() |
+|  Gráfica de cajas y bigotes | boxplot()  |  geom_boxplot() |
+|Etiquetar ejes | xlab="" , ylab=""| labs(x="", y="")|
+
+## **Ejercicios**
+
+### **Ejercicio 1.** Elaborar un Script de R (Archivo .R)
+
+Elabore un archivo o file con extensión **.R** usando la barra de herramientas de **Rstudio**. Selecciona **File > New file > R script**. Utilice el siguiente ejemplo para completar la información de **metadatos** del script.
+
+    # ----------------------------------------------------------  
+    # Clase 4 - Script Análisis exploratorio de datos.   
+    # Su nombre. 
+    # Fecha de hoy. 
+    # Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.
+    # ----------------------------------------------------------  
+
+Luego, guarde inmediatamente su script como **script_EDA_nombre_apellido.R**.
+
+### **Ejercicio 2.** Configuración del Script
+
+```{r setup, include=FALSE, warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Cargue los paquetes **ggplot2**, **psych**, **readxl** y **readr** usando la función **library()**.
+
+```{r, warning=FALSE,message=FALSE}
+# Paquete para importar datos excel
+library(readxl)
+
+# Paquete para importar datos csv
+library(readr)
+
+# Librería psych para analisis de datos de matrices 
+library(psych)
+
+# Librería para gráficas avanzadas
+library(ggplot2)
+
+```
+
+### **Ejercicio 3.** Explorar y visualizar variación de los datos con un histograma
+El archivo **"peces.xlsx"** contiene el registro de genotipos y peso de 1000 peces pertenecientes a un programa de mejora genética.
+
+**a)** Elabore un objeto denominado "datos" e importe el set de datos **animal.xslx** usando la función **read_excel()** de la librería **readxl**. Observe los datos con la función **summary()** y **str**. Note que las variables **animal_id** y **genotype** están codificadas como **character** y el **weight** como **numeric**
+
+```{r}
+datos <- read_excel("peces.xlsx")
+summary(datos)
+str(datos)
+```
+
+**b)** Transforme las variables **animal_id** y **genotype** a factor usando la función **as.factor()**. Luego, explore nuevamente el set de datos usando la función **summary()**. Finalmente, explore la variable **genotype** con la función **table()**. Pruebe explorar la variable continua weight con la función **table()** y discuta con sus compañeros porqué esto **no es adecuado**.
+
+
+```{r}
+datos$animal_id<- as.factor(datos$animal_id)
+datos$genotype<- as.factor(datos$genotype)
+summary(datos)
+table(datos$genotype)
+# Ejecute como prueba pero no incluya en el reporte esta función table(datos$weight) 
+```
+
+**c)** A partir de su set de datos elabore una gráfica para la variable continua **weight**. Use el comando **ggplot()**, el argumento **aes()** para seleccionar los datos, y la variable respuesta **weight**. Con el simbolo **+** agregue el comando **geom_histogram()** para obtener un histograma.
+
+```{r, echo=TRUE, fig.cap="Figura 1. Primera y segunda capa de un histograma con ggplot."}
+ggplot(datos, aes(x = weight)) +
+  geom_histogram()
+```
+
+
+**d)** Para distinguir los diferentes niveles del factor **genotype**
+en el histograma, incluya dentro del comando **geom_histogram()** el argumento **aes(color = genotype)**.
+
+```{r, fig.cap="Figura 2. Agrega argumento aes(color = genotype al comando geom_histrogram."}
+ggplot(datos, aes(x = weight)) +
+  geom_histogram(aes(color = genotype))
+```
+
+**e)** Con el objetivo de visualizar de mejor forma los datos incluya dentro del comando **geom_histogram()** y "después de una ," la siguiente línea de código **position = "identity", bins = 20, alpha = 0.4** . Modifique los valores de **bins** y **alpha** por otros números y observe como cambia la estética del gráfico. Seleccione un valor que permita una buena visualización de la distribución de cada nivel dentro de genotype.
+
+```{r, fig.cap="Figura 3. Agrega argumento bins (contenedores) al comando geom_histrogram."}
+ggplot(datos, aes(x = weight)) +
+  geom_histogram(aes(color = genotype), 
+  position = "identity", bins = 20, alpha = 0.4)
+```
+
+**f)** Grafique la distribución acumulada empírica de la variable **weight** usando el comando **plot(ecdf())** y compare con el histograma anterior. ¿Es posible deducir a partir de la densidad empírica la distribución de frecuencia de los datos?  
+
+```{r, fig.cap="Figura 4. Distribución empírica acumulada de la variable weight."}
+# Distribución acumulada empírica.
+plot(ecdf(datos$weight), main="Distribución acumulada empírica", xlab="weight")
+```
+
+### **Ejercicio 5.** Explorar y visualizar variación de los datos con un boxplot.
+
+**a)** A partir del set de datos anterior elabore una gráfica de cajas y bigotes para la variable **weight**. Use el comando **ggplot()** y el argumento **aes(x,y)** para seleccionar los datos, donde x será la variable de clasificación **genotype** e y será la variable respuesta **weight**. Con el simbolo **+** agregue el comando **geom_boxplot()** para obtener un boxplot.
+
+```{r, echo=TRUE, fig.cap="Figura 5. Primera y segunda capa de gráfica de boxplot."}
+ggplot(datos, aes(x=genotype, y=weight)) +
+    geom_boxplot()
+```
+
+**b)** Para distinguir de mejor forma los diferentes niveles del factor **genotype** en el boxplot incluya dentro del argumento **aes()** el siguiente parámetro **fill = genotype**.
+
+```{r, fig.cap="Figura 6. Primera y segunda capa de gráfica de boxplot con argumento fill=genotype"}
+ggplot(datos, aes(x=genotype, y=weight, fill=genotype)) +
+    geom_boxplot()
+```
+
+**c)** Use el comando **labs()** para incluir la etiqueta del eje y "Peso de cosecha (g)" 
+
+```{r, fig.cap="Figura 7. Agrega etiquetas al boxplot."}
+ggplot(datos, aes(x=genotype, y=weight, fill=genotype)) +
+    geom_boxplot()+
+  labs(y="weight")
+```
+
+**d)** agregue a al código anterior el comando **geom_jitter()** para visualizar todos los datos de "weight"
+
+```{r, fig.cap="Figura 8. Agreta nueva capa al boxplot con el comando geom_jitter."}
+ggplot(datos, aes(x=genotype, y=weight, fill=genotype)) +
+    geom_boxplot()+
+  labs(y="weight")+
+geom_jitter(color="blue", size=1, alpha=2)
+```
+
+
+### **Ejercicio 6.** Explorar y visualizar la interacción de dos factores
+El archivo **"tilapia.xlsx"** contiene el registro simulado de pesos de 1000 peces de un experimento de alimentación con 6 dietas diferentes.
+
+**a)** Importe el set de datos **tilapia.xslx** usando la función **read_excel()** de la librería **readxl**.
+
+Transforme a factor las columnas **animal_id**, **feed** y **sex** con la función **as.factor()**. Luego, explore el set de datos usando la función **summary()** y explore los factores **feed** y **sex** con la función **table()**. Pruebe explorar la variable **animal_id** con la función **table()** y discuta con sus compañeros porqué **esto no es adecuado**.
+
+```{r}
+tilapia <- read_excel("tilapia.xlsx")
+tilapia$id<- as.factor(tilapia$id)
+tilapia$feed<- as.factor(tilapia$feed)
+tilapia$sex<- as.factor(tilapia$sex)
+summary(tilapia)
+table(tilapia$feed, tilapia$sex)
+# Ejecute como prueba pero no incluya en el reporte  table(tilapia$feed, tilapia$id) 
+```
+
+**b)** A partir del set de datos de tilapia elabore una gráfica de cajas y bigotes para la variable **weight**. Use el comando **ggplot()** y el argumento **aes(x,y,fill)** para seleccionar los datos, el factor **feed**, la variable respuesta **weight** y el 2do factor **sex**. Agregue el comando **geom_boxplot()** para obtener el boxplot.
+
+¿Observa algún patrón claro de interacción entre sex y feed?
+
+¿Cuál de los dos factores tiene mayor influencia en la variable respuesta?
+
+```{r, echo=TRUE, fig.cap="Figura 9. Grafica de boxplot con interacción de dos factores."}
+ggplot(tilapia, aes(x=feed, y=weight, fill=sex)) +
+    geom_boxplot()+
+  labs(y="weight")
+```
+
+**c)** Realice ahora una gráfica de interacción y una gráfica de tamaño de los efectos de la variable *weight* usando las funcines **interaction.plot()** y **plot.design()**. Incluya *feed* y *sex* como factores.
+
+Para el promedio (mean), la forma correcta de escribir el modelo de interacción es el siguiente:
+
+**interaction.plot(Factor A, Factor B, Variable Respuesta, fun=c(mean))**
+
+```{r, fig.cap="Figura 10. Gráfica interaction.plot del paquete psyc."}
+interaction.plot(tilapia$feed, tilapia$sex, tilapia$weight, fun = mean)
+```
+
+**d)** Ahora mejore la visualización del gráfico de interacción mediante la inclusión del nombre de los ejes **(xlab="", ylab"")**, un color para cada tratamiento **col=**, agregar simbolos a cada valor promedio **pch=** e mediante la inclusión tanto de una línea como de un punto con el argumento **type=b**.
+
+Responda: ¿Existe interación entre los factores sex y feed?
+
+```{r, fig.cap="Figura 11. Gráfica interaction.plot del paquete psyc con nuevas etiquetas y símbolos."}
+interaction.plot(tilapia$feed, tilapia$sex, tilapia$weight, fun = mean, xlab = "", ylab = "Peso promedio (g)", col=1:2, trace.label="Sexo", pch = c(15, 16), type = "b")
+
+```
+
+**d)** Realice ahora una grafica de tamaño de los efectos de la variable **weight** usando la función **plot.design()**. Incluya **feed** y **sex** como factores.
+
+La forma correcta de escribir el modelo de interacción es el siguiente:
+
+**plot.design(respuesta ~ factor a, factor b)**  
+
+el simbolo **~** se lee modelado por o explicado por.
+
+Incluya etiquetas en el eje x e y, de un color a su gráfica con el comando **col=**
+
+Responda: ¿Qué factor tiene una mayor influencia en la variable respuesta weight?
+
+```{r, fig.cap="Figura 12. Gráfica de tamaño de los efectos."}
+plot.design(tilapia$weight ~ tilapia$sex + tilapia$feed, xlab = "Factores", ylab="Weight", col="blue")
+
+```
+
+### **Ejercicio 7.** Explorar y visualizar covariación de variables continuas y discretas.
+
+El archivo **"Reproductive_traits.xlsx"** contiene información reproductiva del salmón Japones (*Oncorhynchus keta*) colectada desde un programa de suplementación en Piscicultura por [Hasegawa, K., Okamoto, Y., & Morita, K. (2021)](https://besjournals.onlinelibrary.wiley.com/doi/10.1002/2688-8319.12107). Con este set de datos realice las siguientes actividades.
+
+**a)** Cree un objeto llamado **repro** e importe el set de datos **Reproductive_traits.xslx** usando la función **read_csv()** del paquete **readxl**. Explore el set de datos completo con la función **summary()**. Transforme a factor las variables *sampling year*  y *sampling river*.
+
+```{r, message=FALSE, warning=FALSE}
+repro <- read_csv("Reproductive_traits.csv")
+repro$`sampling year` <- as.factor(repro$`sampling year`)
+repro$`sampling river` <- as.factor(repro$`sampling river`)
+summary(repro)
+```
+
+**b)** Investigue la función **pairs.panels()** de la librería **psych**. Use esta función para obtener histogramas, gráficas de densidad (density = TRUE) y la correlación con el método de pearson (ej. method = "pearson") de todas las variables del set de datos, use repro[,1:7].
+
+Responda: ¿Por qué no es adecuado incluir en este análisis de correlación las variables **sampling year** y **sampling river**?
+
+```{r, echo=TRUE, fig.cap="Figura 13. Gráfica de correlación con algunas variables que no son cuantitativas."}
+# Gráfica de correlación de variables continuas
+pairs.panels(repro[,1:7], method = "pearson", hist.col = "red",  density = TRUE, font=2)
+```
+
+**c)** Elimine la variable **sampling year** y la variable **sampling river** del análisis anterior seleccionando las columnas 3 a 7 (repro[,3:7]) y responda: 
+
+- ¿Qué variables son cuantitativas continuas?
+- ¿Qué variables son cuantitativas discretas?
+- Investigue y responda si es adecuado calcular la correlación de pearson para variables discretas. 
+
+```{r, fig.cap="Figura 14. Gráfica de correlación con variables cuantitativas continuas y discretas."}
+# Gráfica de correlación de variables continuas
+pairs.panels(repro[,3:7], method = "pearson", hist.col = "red",  density = TRUE, font=2)
+```
+

@@ -31,12 +31,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 # PALABRAS DE BIENVENIDA
 
-**Dr. José Gallardo**  
-Director del Diplomado.
-
 - **Programa consolidado**  
 1ra a 3ra versión: 67 graduados.  
-4ta versión: 7 matriculados.  
+4ta versión: 14 matriculados.  
 
 - **Excelencia académica**  
 PUCV Acreditada por 7 años (todas las áreas).  
@@ -44,14 +41,7 @@ Profesores con Doctorado.
 Vinculación permanente con la industria.  
 Doctorado en Acuicultura acreditado por 5 años: 92 graduados.  
 
-# PRESENTACIÓN DE LOS PARTICIPANTES
-
-```{r, echo=FALSE, out.width = '100%' }
-knitr::include_graphics("Welcome.png")
-```
-
-
-# PROFESORES Y AYUDANTES DIPLOMADO
+# PROFESORES Y COORDINACIÓN DIPLOMADO
 
 **Dr. José Gallardo Matus**  
 Profesor de genética y genómica aplicada  
@@ -64,13 +54,20 @@ Doctora en Ciencias Agropecuarias
 Investigadora postdoctoral PUCV
 
 **Mag. Paz Caballero**  
+Estudiante Doctorado en Acuicultura
 Coordinadora postulación y matrículas.
+
+
+# PRESENTACIÓN DE LOS PARTICIPANTES
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("Welcome.png")
+```
+
 
 # OBJETIVOS DEL DIPLOMADO
 
-Al finalizar el Diplomado los alumnos serán capaces de:
-
-• Aplicar técnicas avanzadas de análisis de datos, inferencia estadística y modelamiento predictivo con aprendizaje automático (machine learning), para extraer información valiosa de datos relacionados a la acuicultura.
+• Aplicar técnicas avanzadas de análisis de datos, inferencia estadística y modelamiento predictivo con aprendizaje automático (machine learning).
 
 • Seleccionar y utilizar modelos estadísticos apropiados para el análisis de datos de acuicultura, incluyendo modelos lineales, no lineales y multivariados.
 

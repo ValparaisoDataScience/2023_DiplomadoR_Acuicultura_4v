@@ -1,0 +1,205 @@
+---
+title: "CLASE 01 - PROGRAMACIÓN CON R"
+subtitle: 'Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.'
+author: Dr. José Gallardo Matus
+institute: Pontificia Universidad Católica de Valparaíso 
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  beamer_presentation:
+    theme: "Malmoe"
+    colortheme: "seahorse"
+    fonttheme: "professionalfonts"
+    includes:
+      in_header: mystyle.tex
+---
+
+```{r setup, include=FALSE, comment=TRUE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## **PLAN DE CLASE**
+
+1. **Introducción**
+
+
+- ¿Qué es R, Rstudio y Posit cloud?
+
+- ¿Por qué usar R para el análisis de datos en acuicultura?
+
+- Investigación reproducible.
+
+2. **Práctica con R, Rstudio y Posit cloud**
+
+
+- Iniciar un proyecto de análisis de datos con R.
+
+- Familiarizarse con manipulación de objetos y datos con R.
+
+
+## **¿QUÉ ES R?**
+
+1. **R** es un lenguaje y entorno de programación de código abierto o libre creado por Ross Ihaka y Robert Gentleman en 1993 (University of Auckland) para realizar análisis estadísticos y gráficos.
+
+
+2. Los usuarios de R tienen la libertad de ejecutar, copiar, distribuir, estudiar, modificar y mejorar el **_software_**.
+
+3. Utilizar **R** supone un ahorro económico para los estudiantes, las instituciones educativas o incluso las empresas que decidan usarlo.
+
+## **¿POR QUÉ USAR "R"?**
+
+1. Aprender a usar **R** te da **_independencia digital_**, te permite **_cooperar con otros_** y **_beneficiarte de la ayuda de otros._**
+
+1. Actualmente existen cerca de **17.000 librerías o apps** disponibles de forma gratuita para trabajar con R en ámbitos tan diferentes como las ciencias sociales, la economía, la astronomía, la ingeniería y por su puesto la acuicultura.
+
+3. **R** permite entonces difundir el conocimiento a toda la sociedad y no solo a los que pueden pagar por ella.
+
+## **INVESTIGACIÓN REPRODUCIBLE**
+
+La investigación reproducible implica que desde los mismos datos y códigos se generarán los mismos resultados.
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("Investigacion_reproducible.png")
+```
+
+[Peng. 2011](https://www.science.org/doi/10.1126/science.1213847)
+[Sánchez et al. 2016](https://www.revistaecosistemas.net/index.php/ecosistemas/article/view/1178)
+
+## **BENEFICIOS PARA EL ANALISTA DE DATOS**
+
+- **Permite la ejecución de tareas de análisis repetitivo sin esfuerzo.**
+- Muy fácil corregir y regenerar resultados, tablas y figuras.
+- **Reducción drástica del riesgo de errores.**
+- Facilita la colaboración.
+- **Mayor facilidad para escribir reportes**
+- Facilita el proceso de revisión por pares.
+- **Ahorro de tiempo y esfuerzo al reutilizar código en diferentes proyectos.**
+
+## **RUTA DEL ANÁLISIS DE DATOS REPRODUCIBLE CON R**
+
+1. **Toma de datos.**    
+Es importante estandarizar y mantener estructura.     
+2. **Manipulación de datos.**  
+Es importante cuidar los datos originales.  
+Trabajaremos con R + Rstudio    
+3. **Análisis datos integrado con texto.**  
+Facilita la colaboración.  
+Trabajaremos con RMarkdown + Inteligencia artificial.    
+4. **Control de versiones y publicar resultados.**  
+Trabajaremos Github.  
+Es importante comunicar de forma efectiva.  
+
+## **CONCEPTOS BÁSICOS DE PROGRAMACIÓN**
+
+\columnsbegin
+\column{.8\textwidth}
+
+**Metáfora de la maquina expendedora de bebidas**  
+\
+&nbsp;
+
+1. La máquina tiene una función específica.
+
+2. Los productos son objetos almacenados de forma ordenada.
+
+3. Los objetos tienen características (Nombre, precio, ubicación).
+
+4. Para comprar debo seguir una secuencia de pasos (similar a un programa = códigos en secuencia).
+
+\column{.3\textwidth}
+```{r, echo=FALSE, out.width = '90%' }
+knitr::include_graphics("maquina_1.png")
+```
+
+\columnsend
+
+## **¿QUÉ ES UN SCRIPT?**
+
+1. Los scripts son documentos de texto con una secuencia de comandos que permiten ejecutar programas.
+
+2. Estos archivos son iguales a cualquier documentos de texto, pero R puede leer y ejecutar el código que contienen.
+
+3. Los códigos de R están contenidos en librerías o packages o aplicaciones.
+
+4. Algunos script que usaremos en este diplomado tienen extensión de archivo .R, por ejemplo mi_script.R.
+
+## **EJEMPLO R SCRIPT**
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("R_script.png")
+```
+
+## **R ES UN LENGUAJE ORIENTADO A OBJETOS**
+
+**Tipos de objetos para trabajar con R**
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("ObjetosR.png")
+```
+
+## **OBJETO: DATA.FRAME**
+
+**Principales características.**  
+\
+&nbsp;
+
+- Objeto similar a una tabla de datos.  
+- Almacenan texto o números.  
+- Primera fila contiene el nombre de las variables.  
+- Puedo unir con otro **data.frame**.  
+- Puedo aplicar funciones para calcular estadísticos.  
+- Pero, no tiene atributos de una matriz, ni de un vector, no es una serie de tiempo.  
+
+## **¿QUÉ ES R STUDIO?**
+
+
+1. **Rstudio** es el más popular entorno de desarrollo integrado (integrated development environment, IDE) para trabajar con **R**.
+
+2. **Rstudio** es un **_software_** libre y de código abierto creado por **Joseph J. Allaire en 2009** para la ciencia de datos, la investigación científica y la comunicación técnica.
+
+3. Actualmente es mantenido por la Corporación de Beneficio Público **Rstudio PCB**, la que ha creado otros software como Rmarkdown.
+
+
+## **EJEMPLO RSTUDIO**
+
+```{r, echo=FALSE, out.width = '105%' }
+knitr::include_graphics("R_studio.jpg")
+```
+
+## **¿QUÉ ES POSIT?**
+
+- Empresa creadora de Rstudio y otras importantes app de ciencia de datos de código abierto.
+
+- Actualmente permite desarrollo de análisis de datos con R y Phyton.
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("rebrand-posit-rstudio.png")
+```
+
+## **POSIT - VERSION CLOUD**
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("POSIT.png")
+```
+
+
+## **PRÁCTICA PROGRAMACIÓN CON R**
+
+**Guía de trabajo programación con R en Rstudio.cloud**.
+
+```{r, echo=FALSE, out.width = '80%' }
+knitr::include_graphics("Run.png")
+```
+
+## **RESUMEN DE LA CLASE**
+
+* Investigación reproducible.
+
+* Ruta del análisis de datos reproducible con **R**.
+
+* Iniciamos un proyecto de análisis de datos con **R**.
+
+* Escribimos un código de programación de **R**, **Rstudio** y **Posit cloud**.
+
+* Nos familiarizamos con la manipulación de objetos y datos.
+
+

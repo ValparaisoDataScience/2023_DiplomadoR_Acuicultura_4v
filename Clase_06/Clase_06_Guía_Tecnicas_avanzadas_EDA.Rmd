@@ -1,0 +1,369 @@
+---
+title: "Clase 06 - Guía técnicas avanzadas para realizar EDA."
+subtitle: 'Diplomado en Análisis de datos con R para la Acuicultura.'
+author:
+ name: Dr. José A. Gallardo y Dra. María Angélica Rueda.
+ affiliation: Pontificia Universidad Católica de Valparaíso
+ email: <jose.gallardo@pucv.cl>
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: hide
+  word_document: default
+  pdf_document:
+    latex_engine: xelatex
+---
+
+<style>
+#TOC {
+  color: black;
+  font-familiy: Calibri;
+  font-size: 14px;
+  border-color: #708090; 
+}
+body {
+   color: black;
+   font-familiy: Calibri;
+}
+
+pre {
+  color: black;
+  background-color: #F8F8FF;
+}
+# header {
+  color: #800000;
+  font-familiy: Calibri;
+  background-color: #F5F5F5;
+  opacity: 0.8;
+  font-size: 16px;
+}
+</style>
+
+#### **Introducción**
+
+#### **_Tranformación y manipulación de datos._**
+
+La transformación y manipulación de datos es una de las actividades que más tiempo demanda durante un análisis exploratorio ya que implica tanto dar el formato adecuado para realizar los análisis estadísticos, como aplicar transformaciones sobre las variables de interés. Este proceso se lleva a cabo con el fin de generar un conjunto de datos limpio y diferente del set de datos original, adecuado para su *posterior* análisis.
+
+La manipulación de datos se puede resumir, pero no limitar, a cinco operaciones básicas:
+
+**1.-** **Transformar un conjunto de datos desordenado (messy) a ordenado (Tidy)**
+
+Tres caracteristicas nos permiten reconocer si nuestros datos están ordenados o no para ser manipulados por R de forma natural y eficiente.
+
+| **Tidy data (datos ordenados)**  |  **Messy data (desordenados)**  |
+|:---:|:---:|
+|  Cada columna es una variable |  Cualquier conjunto de datos que no cumple alguno de estos criterios |
+|  Cada fila es una observación |   |
+| Cada celda es un simple dato o valor  |   |
+
+
+**2.-** **Extraer subconjuntos de datos** 
+
+Ya sea por filas utilizando algún criterio o por columnas (variables) donde no es necesario considerar a todas las variables presentes en la base de datos original.
+
+**3.-** **Transformar variables**
+
+La transformación de datos implica realizar operaciones aritméticas o lógicas sobre las variables de interes. En general cuando una **variable es continua** realizamos operaciones **_aritméticas_** y cuando es **categórica** operaciones **_lógicas_**.
+
+**4.-** **Resumir los datos**
+
+Se puede resumir la información por variable calculando por ejemplo valores promedio, desviaciones estándar, valores mínimos o máximos.
+
+**5.-** **Compactar o unir con otros conjuntos de datos** 
+
+Es posible que en tiempos posteriores surjan nuevas bases de datos que pueden enriquecer nuestros análisis, es muy útil combinar/compactar dicha información de forma homogénea en una sola base de datos.
+
+#### **_Visualización de datos._**
+
+Como ya hemos mencionado, en la etapa de análisis exploratorio de datos es muy importante hacer representaciones gráficas o visualizar los datos, durante la etapa de manipulación esto nos permitirá:
+
+* Detectar posibles valores atípicos u "outliers" en inglés.
+
+* Identificar la posible distribución subyacente de la variable respuesta **(Y)**. 
+
+* Analizar posibles relaciones/asociaciones entre la variable respuesta **(Y)** y alguna variable explicativa **(X)**.
+
+* Sintetizar de forma gráfica la información relevante de los datos.
+
+En esta guía continuaremos trabajando con el paquete **ggplot2**, que como ya hemos visto contiene la función **_ggplot()_** con la que se generan gráficos tanto visualmente informativos como de agradable aspecto. Pero además trabajaremos con varias funciones del paquete [dplyr](https://dplyr.tidyverse.org/), y algunas del paquete [tidyr](https://tidyr.tidyverse.org/). En conjunto estos paquetes son una de las herramientas muy poderosas de R para transformar y manipular datos de forma efectiva.
+
+#### **Comandos para realizar gráficas avanzadas con ggplot2**
+
+|  **Comandos** | **Función** |
+|:-------------|:------------------|
+| **ggplot():**| Comando base sobre el cual se realizan gráficas avanzadas. |
+| **geom_point():** | Argumento que se adiciona a la función ggplot() para generar diagramas de dispersión. |
+| **geom_line():** | Argumento que se adiciona a la función ggplot() para generar diagramas de líneas. |
+| **geom_col():** | Argumento que se adiciona a la función ggplot() para generar diagramas de barras. |
+| **geom_histogram():** | Argumento que se adiciona a la función ggplot() para generar histogramas. | 
+| **geom_boxplot():** | Argumento que se adiciona a la función ggplot() para generar gráficos de cajas y bigotes. |   
+| **facet_wrap(~ variable):** | Argumento que se adiciona a la función ggplot() para que realice tantos gráficos según los niveles que tenga la variable. |
+
+#### **Comandos para manipular datos con dplyr**
+
+|  **Comandos** | **Función**      |
+|:-------------|:------------------|
+| **%>%** | Este comando se llama **_pipe_** o "tubería", es una herramienta para la composición de funciones, lo que facilita la resolución de problemas grandes partiéndolos en pedazos pequeños. |
+| **filter()** | Filtra los datos por algún criterio establecido por el analista. |
+| **arrange()** | Ordena la base de datos según una variable de forma ascendente o descendente. |
+| **mutate()** | Cambia el contenido de una variable o genera variables derivadas a partir de variables existentes en el conjunto de datos. |
+| **summarize()** | Resume la información de la/s variable/s en un solo dato. Algunas funciones que se pueden usar para resumir la información son: **_mean_** *para calcular el promedio por variable*, **_sum_** *para sumar las observaciones de una variable*, **_median_** *para calcular la mediana por variable*,**_min_** *para encontrar el valor mínimo por variable* y **_max_** *para encontrar el valor máximo por variable*.|
+| **group_by** | Agrupa las observaciones (filas de la base de datos) por algún criterio establecido por el analista.|
+
+#### **Objetivos de aprendizaje**
+
+Los objetivos de aprendizaje de esta guía son:
+
+**1**. - Realizar un análisis exploratorio de datos avanzado.  
+
+**2**. - Realizar gráficas avanzadas con **ggplot2**.
+
+**3**- - Realizar transformación y manipulación de datos con **tidyr** y **dplyr**.
+
+## **Ejercicios**
+
+### **Ejercicio 1.** Elaborar un Script de R (Archivo .R).
+
+Elabore un archivo o file con extensión **.R** usando la barra de herramientas de **Rstudio**. Selecciona **File > New file > R script**. Utilice el siguiente ejemplo para completar la información de **metadatos** del script.
+
+    # ----------------------------------------------------------  
+    # Clase 6 - Técnicas avanzadas para realizar EDA.   
+    # Su nombre. 
+    # Fecha de hoy. 
+    # Diplomado en Análisis de datos con R para la Acuicultura. 
+    # ----------------------------------------------------------  
+
+Luego, guarde inmediatamente su script como **script_EDA_nombre_apellido.R**.
+
+### **Ejercicio 2.** Configuración del Script.
+
+```{r setup, include=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Cargue los paquetes **readxl**,**dplyr**, **tidyr** y **ggplot2** usando la función **_library()_**.
+
+```{r, include=FALSE, message=FALSE}
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+### **Ejercicio 3.** Importar y transformar datos con R.  
+
+En el siguiente ejercicio deberá realizar la manipulación de un pequeño conjunto de datos desordenado (messy) de crecimiento en peces diploides y triploides de salmón del Atlántico obtenido desde la investigación realizada por ([Harvey et al., 2017](https://doi.org/10.1186/s12863-017-0502-x). 
+
+**a)** **Explorar y ordenar archivo excel.**  
+Descargue el archivo excel **salmon.xlsx** a su computadora y explore la hoja 1 llamada **Error**. Observe que los datos no están adecuadamente ordenados para ser importados a R. Edite el archivo excel para dar un formato adecuado, elimine la leyenda de la Tabla 1, mueva los datos de la Tabla 1 a celda A1, elimine otras tablas y figuras. Al final de la edición sus datos deberían verse como en la siguiente figura.
+
+```{r, echo=FALSE, out.width = '70%' }
+knitr::include_graphics("Messy_Salmon.png")
+```
+
+**b)** **Importar y  ordenar datos con gather().**
+- Cree un objeto llamado **messy_salmon** e importe dentro de este objeto la hoja 2 del set de datos **salmon.xlsx**. Use la función **_read_excel()_** de la librería **readxl**. Explore los datos don **head()** o **View()**. Note que las variables **Sample** y **Family** están adecuadamente ordenados para analizar con R. En cambio, las variables **Triploid** y **Diploid** no están adecuadamente ordenadas, ellas representan dos niveles del factor ploidia y contienen al peso de los peces.   
+
+
+```{r}
+datos_salmon <- read_excel("salmon.xlsx", sheet=1)
+head(messy_salmon)
+
+```
+- Use la función **gather()** del paquete tidyr para ordenar las columnas 3:4 en un solo factor llamado **Ploidy**, creando la variable **Weight**. Almacene la tabla en un nuevo objeto llamado **tidy_salmon**. 
+
+```{r}
+messy_salmon %>% gather("Ploidy", "Weight", 3:4)
+tidy_salmon <- messy_salmon %>% gather("Ploidy", "Weight", 3:4)
+
+```
+
+
+**c)** **Explorar y transformar variables.**
+Explore el set de datos tidy_salmon usando la función **str()** y luego transforme a factor la variable **Sample**, **Family** y **Ploidy**, use el comando **as.factor()**. Use **summary** para visualizar que las variables fueron trasformadas adecuadamente a factor. Note que, al parecer, existe el mismo número de datos diploides que triploides.
+
+```{r}
+str(tidy_salmon)
+```
+
+```{r}
+tidy_salmon$Sample <- as.factor(tidy_salmon$Sample)
+tidy_salmon$Family <- as.factor(tidy_salmon$Family)
+tidy_salmon$Ploidy <- as.factor(tidy_salmon$Ploidy)
+summary(tidy_salmon)
+```
+
+
+**d)** **Eliminar datos NA.** 
+Note de la tabla anterior que la variable **Weight** tiene 251 valores perdidos NA. Use la función **na.omit()** para eliminar estos datos perdidos. Finalmente, usa la función **summary()** y **table()** para evaluar si los nuevos datos están o no balanceados respecto de los tratamientos **Family** y **Ploidy**. 
+
+```{r}
+tidy_salmon <- na.omit(datos_salmon)
+summary(tidy_salmon)
+```
+
+
+```{r}
+table(tidy_salmon$Family, tidy_salmon$Ploidy)
+```
+
+
+### **Ejercicio 4.** Crear tablas con resumen de variables.
+
+**a)** Cree un objeto llamado **tidy_data** e importe dentro de este objeto la hoja 3 del set de datos **salmon.xlsx**. Use la función **_read_excel()_** de la librería **readxl**. Explore con **head()**. Note que todas las variables están adecuadamente ordenadas para analizar con R.
+
+```{r}
+tidy_salmon <- read_excel("salmon.xlsx", sheet=3)
+head(tidy_salmon)
+```
+
+
+**b)** **Filtrar datos por un criterio de clasificación** 
+
+Del conjunto de datos **tidy_salmon** seleccione solo la información del grupo **Triploid**. Para ello combine una tubería **%>%** con la función **_filter()_**, dentro de filter use el argumento *Ploidy == "Triploid"*.
+
+```{r}
+tidy_salmon %>%
+  filter(Ploidy == "Triploid")
+```
+
+**c)** **Filtrar datos por dos criterios de clasificación** 
+
+Del set de datos **tidy_salmon** seleccione los datos del Grupo **Triploid** y de la familia **11** simultaneamente. Para ello combine una tubería **%>%** con la función **_filter()_**. Dentro de filter use el argumento *Ploidy == "Triploid"* y *Family == "11"*.
+
+```{r}
+tidy_salmon %>%
+  filter(Ploidy == "Triploid", Family == "11")
+```
+
+**d)** **Calcular medidas resumen** 
+
+Del conjunto de datos **tidy_salmon** seleccione ahora los peces diploides **Diploid** usando la función **_filter()_**. Combine con una nueva tubería y usando la función **_summarize()_** calcule la media de la variable **Weight** como **mean(Weight)**. 
+
+```{r}
+tidy_salmon %>%
+  filter(Ploidy == "Diploid")%>%
+  summarize(mean(Weight))
+```
+
+**e)** Una de las grandes ventajas de la función **_summarize()_** es que puede calcular varias medidas de resumen simultáneamente. Del conjunto de datos **tidy_salmon** seleccione peces diploides **Diploid** y calcule para la variable **Weight** el número de datos **n()**, el promedio **mean()**, la mediana **median()**, el valor mínimo **min()**, máximo **max()** y la desviación estándar **sd()**. Nrecuerde que el conteo con **n()** no requiere indicar la variable respuesta.
+
+```{r}
+tidy_salmon %>%
+  filter(Ploidy == "Diploid")%>%
+  summarize(n(), mean(Weight), median(Weight), min(Weight), max(Weight), sd(Weight))
+```
+
+**f)** Ahora, cambie los títulos de cada columna agregando al código anterior un nuevo nombre entre comillas. Siga este ejemplo para la primera columna **summarize("N" = n()** y complete para las columnas restantes.
+
+```{r}
+tidy_salmon %>%
+  filter(Ploidy == "Diploid")%>%
+  summarize("N"=n(), "Mean"=mean(Weight), "Median"= median(Weight), "Minimun"=min(Weight), "Maximun"=max(Weight), "Standard deviation"=sd(Weight))
+```
+**g)** Otra ventaja de dplyr es que puede resumir la información de todos los niveles de un factor usando **group_by()**. Esto es útil para elaborar tablas resumen de varios factores y variables simultaneamente. Usando**group_by()** y combinando con **summarize()** replique la siguiente tabla.
+
+```{r}
+ tidy_salmon %>%
+  group_by(Ploidy)%>%
+  summarize("N"=n(), "Weight (Mean)"=mean(Weight), "Weight (sd)"=sd(Weight), "Length (Mean)"=mean(Weight), "Length (sd)"=sd(Weight))
+
+
+```
+
+### **Ejercicio 5.** Graficas de barras y paneles.
+
+**a)** **Graficar diagramas de barras con ggplot()** 
+
+Con el conjunto de datos **tidy_salmon** elabore un gráfico de barras con la función **ggplot()**. Use en la estética aes la variable **Ploidy** y agregue una seguna capa con el la función **geom_bar()**.
+
+```{r, echo=TRUE}
+tidy_salmon %>% ggplot(aes(x= Ploidy))+
+   geom_bar()
+```
+
+**b)** **Colorear diagramas de barras con ggplot()** 
+En la gráfica anterior, coloree la variable Ploidia usando el argumento **fill=Ploid** dentro de *aes*.
+```{r}
+tidy_salmon %>%  ggplot(aes(x= Ploidy, fill=Ploidy))+
+   geom_bar()
+```
+**c)** **Eliminar etiquetas y agregar fuente de la figura.** 
+En la gráfica anterior modifique la leyenda del eje **x** con el comando **labs()**. Nombre el eje x como **""** para eliminar la leyende del eje e incluya un pie de figura "Fuente: Harvey et al., 2017" con el argumento **captions**.
+
+```{r}
+tidy_salmon %>%  ggplot(aes(x= Ploidy, fill=Ploidy))+
+   geom_bar()+
+  labs(x= "", caption = "Fuente: Harvey et al., 2017")
+```
+**d)** **Paneles para visualizar dos factores.**
+Para visualizar los datos de cada familia incluya a la gráfica anterior una nueva capa con el comando **facet_wrap(~ Family)**.
+
+```{r fig.width= 8, fig.align='center'}
+tidy_salmon %>%  ggplot(aes(x= Ploidy, fill=Ploidy))+
+   geom_bar()+
+  labs(x= "", caption = "Fuente: Harvey et al., 2017")+
+   facet_wrap(~ Family)
+```
+
+
+### **Ejercicio 6.** Variables derivadas y graficas de líneas con barras de error.
+
+La función **mutate()** es muy útil para generar variables derivadas. En este ejercicio usaremos esta función para calcular, graficar y comparar varias variables derivadas como el indice de condición y el error estándar.
+
+**a)** Use la función **mutate()** para crear la variable índice de condición (K) como $Weight/(Length^3)*100$.
+
+```{r}
+tidy_salmon <- tidy_salmon %>%  mutate(K=(Weight/(Length^3)*100))
+head(tidy_salmon)
+
+```
+
+**b)** Cree un objeto llamado **tidy_plot**, calcule con **summarize()** y almacene en el n, promedio y la desviación estándar del indice de condición K por Familia, recuerde usar **group_by(Family)**.
+
+```{r}
+tidy_plot <- tidy_salmon %>%  group_by(Family) %>% summarize(n=n(), "K (mean)" = mean(K), "K (sd)"=sd(K))
+
+tidy_plot
+
+```
+
+**c)** Ahora crearemos una variable derivada denominada **error**, en la cual calcularemos el error estándar con la fórmula $error = sd/sqrt(n)$. Para ello use nuevamente el comando **mutate()**.
+
+```{r}
+tidy_plot <- tidy_plot %>%
+  mutate("K (error)" = `K (sd)`/sqrt(n))
+head(tidy_plot)
+```
+
+**d)** Finalmente crearemos una gráfica de lineas con barras de error. 
+
+La primera capa la crearemos con el comando **ggplot()**, incluya el argumento **aes()** y defina como variable x= Family, como variable y=`K (mean)`, y como color=Family y group=Family la variable Family.
+
+```{r}
+tidy_plot %>%
+  ggplot(aes(x=Family, y= `K (mean)`, color=Family, group=Family))
+```
+
+Ahora agregaremos la segunda capa con el comando **geom_point**.
+
+```{r}
+tidy_plot %>%
+  ggplot(aes(x=Family, y= `K (mean)`, color=Family, group=Family))+
+  geom_point()
+```
+
+Finalmente, la tercera capa serán los errores estándar con el comando **geom_errorbar**. Investigue el uso del comando **geom_errorbar()** en el siguiente [enlace](http://www.sthda.com/english/wiki/ggplot2-error-bars-quick-start-guide-r-software-and-data-visualization)
+
+```{r}
+tidy_plot %>%
+  ggplot(aes(x=Family, y= `K (mean)`, color=Family, group=Family))+
+  geom_point()+
+  geom_errorbar(aes(ymin=`K (mean)`-`K (error)`, ymax=`K (mean)`+`K (error)`), width=.2,
+                 position=position_dodge(0.05))
+```
+

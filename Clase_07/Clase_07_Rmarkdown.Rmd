@@ -1,0 +1,151 @@
+---
+title: "Clase 07 - Reportes dinámicos con Rmarkdown."
+subtitle: 'Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.'
+author: Dr. José Gallardo Matus
+institute: Pontificia Universidad Católica de Valparaíso 
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  beamer_presentation:
+    theme: "Malmoe"
+    colortheme: "seahorse"
+    fonttheme: "professionalfonts"
+    includes:
+      in_header: mystyle.tex
+---
+
+```{r setup, include=FALSE, comment=TRUE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## **PLAN DE CLASE**
+
+**1).** **Introducción**
+
+- Paradigmas para elaborar reportes: WYSIWYG v/s WYSIWYM
+
+- ¿Qué es markdown y para que sirve?
+
+- Ejemplo sintaxis de Markdown.
+
+- ¿Qué es Rmarkdown y para que sirve?.
+
+- Integración con YAML y LATEX.
+
+**2).** **Práctica con R y Rstudio cloud**
+
+- Familiarizarse con sintaxis de Markdown.
+
+- Elaborar reportes dinámicos con Rmarkdown.
+
+## FORMAS DE CREAR REPORTES: WYSIWYG
+
+- **What You See Is What You Get**  
+Word, Power Point, pdf, otros.
+
+```{r, echo=FALSE, out.width = '80%', fig.align='center'}
+knitr::include_graphics("WYSIWYG.png")
+```
+
+[@2022. The Free On-line Dictionary of Computing](https://encyclopedia2.thefreedictionary.com/What-you-see-is-what-you-get)
+
+## FORMAS DE CREAR REPORTES: WYSIWYM
+
+- **What You See Is What You Mean (WYSIWYM)**.  
+HTML, Latex, Markdown
+
+```{r, echo=FALSE, out.width = '80%', fig.align='center'}
+knitr::include_graphics("HTML_Example_Code_new.png")
+```
+
+## ¿QUÉ ES MARKDOWN?
+
+- Markdown es un lenguaje de programación que permite editar y automatizar textos complejos para publicarlo en multiples formatos (HTML, Word, Pdf, PPT). Similar a Latex, permite reproducibilidad.
+
+```{r, echo=FALSE, out.width = '80%', fig.align='center'}
+knitr::include_graphics("Word_vs_Markdown.png")
+```
+
+## EJEMPLO SINTAXIS MARKDOWN
+
+```{r, echo=FALSE, out.width = '80%', fig.align='center'}
+knitr::include_graphics("Markdown-Examples.png")
+```
+
+[Markdown preview](https://markdownlivepreview.com/)
+
+## ¿QUÉ ES RMARKDOWN?
+
+- Rmarkdown es un procesador de texto que permite la creación de reportes de alta calidad integrando texto con códigos de programación R. 
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Rmarkdown.png")
+```
+
+## TIPOS DE REPORTES CON RMARKDOWN
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Reportes.png")
+``` 
+
+## FLUJO DE TRABAJO R MARKDWON
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Open_Rmarkdown.png")
+```
+
+## RMARKDOWN - REPORTE PDF
+
+```{r, echo=FALSE, out.width = '70%', fig.align='center'}
+knitr::include_graphics("Reporte_pdf.png")
+```
+
+## RMARKDOWN - PRESENTACIÓN BEAMER
+
+```{r, echo=FALSE, out.width = '70%', fig.align='center'}
+knitr::include_graphics("Clase_beamer.png")
+```
+
+## YAML HEADER (METADATA)
+
+- YAML es un lenjuage de programación que permite configurar la presentación de los archivos creados con Rmarkdown.
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("YAML.png")
+```
+
+
+## INTEGRACIÓN CON LATEX
+
+LATEX (pronunciado “LAY-tek”) es una herramienta para componer documentos de apariencia profesional muy usando en el ámbito científico.
+
+El siguiente documento, edita una presentación beamer para permitir añanir columnas dentro de una diapositiva y para que la numeracion de tablas sea en español.
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Latex.png")
+```
+
+## BEAMER Y LATEX
+
+```{r, echo=FALSE, out.width = '110%', fig.align='center'}
+knitr::include_graphics("Themes_beamer.png")
+```
+Enlaces de plantillas beamer:  
+[Tutorial beamer](https://latex-beamer.com/tutorials/beamer-themes/) y 
+[Beamer themes](https://mpetroff.net/files/beamer-theme-matrix/)
+
+## RENDER - PRESENTACIÓN
+
+```{r, echo=FALSE, out.width = '100%', fig.align='center'}
+knitr::include_graphics("Render.png")
+```
+ 
+##  **RESUMEN DE LA CLASE**
+
+- Paradigmas: WYSIWYG v/s WYSIWYM.
+
+- Markdown y sintaxis.
+
+- Rmarkdown y flujo de trabajo.
+
+- Render (presentar) diferentes formatos: word, pdf, html, beamer.
+
