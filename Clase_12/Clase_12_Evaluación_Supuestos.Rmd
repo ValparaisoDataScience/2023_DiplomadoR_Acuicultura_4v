@@ -1,0 +1,273 @@
+---
+title: "Clase 12 Evaluación de supuestos pruebas paramétricas"
+subtitle: 'Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.'
+author: Dra. María Angélica Rueda Calderón
+institute: Pontificia Universidad Católica de Valparaíso 
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: 
+  beamer_presentation:
+    theme: "Malmoe"
+    colortheme: "seahorse"
+    fonttheme: "professionalfonts"
+    includes:
+      in_header: mystyle.tex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(car)
+library(lmtest)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+#install.packages("equatiomatic")
+#remotes::install_github("datalorax/equatiomatic")
+library(equatiomatic)
+library(texPreview)
+library(sjPlot)
+```
+
+# PLAN DE LA CLASE
+**1.- Introducción**
+    
+- Supuestos de los análisis paramétricos.   
+- Consecuencias de la violación de los supuestos.
+- Métodos gráficos y análisis de residuos para evaluar supuestos.
+- Pruebas de hipótesis para evaluar supuestos.
+
+**2.- Práctica con R y Rstudio cloud**
+
+- Evaluar supuestos de las pruebas paramétricas.
+- Elaborar un reporte dinámico en formato html.  
+
+# SUPUESTOS: INDEPENDENCIA
+
+**Independencia**  
+
+Cada observación de la muestra no debe estar relacionada con otra observación de la muestra.
+
+*Si se viola este supuesto la prueba paramétrica* **_NO_** *es válida.*
+
+**Ejemplo violación del supuesto**
+
+- Medidas repetidas en un mismo individuo (antes y después de un tratamiento).  
+
+- Observaciones están correlacionadas en el tiempo.
+
+- Observaciones están correlacionadas en el espacio.
+
+# SUPUESTOS: HOMOGENEIDAD DE VARIANZAS
+
+**Homocedasticidad**  
+
+En el caso de comparación de dos o más muestras éstas deben provenir de poblaciones con la misma varianza.
+
+```{r, echo=FALSE, out.width = '100%' }
+knitr::include_graphics("anova.png")
+```
+
+*Alguna heterogeneidad es permitida, particularmente con* **_n > 30_**.
+
+# SUPUESTOS: NORMALIDAD
+
+**Normalidad**  
+Los datos de muestreo se obtienen de una población que tiene distribución normal.   
+
+```{r, echo=FALSE, out.width = '60%', fig.align='center'}
+curve(dnorm,-4,4, ylab = "density")
+#rnorm
+par(xpd=T)
+points(rnorm(100),jitter(rep(0,100)),pch=16,cex=.6,col='seagreen')
+par(xpd=F)
+mtext(side=3,line=.3,'X ~ Normal(0,1)',cex=.9,font=2)
+```
+
+# VIOLACIÓN DEL SUPUESTO DE NORMALIDAD
+
+**¿Cuál es el problema?**  
+Cambia la probabilidad de rechazar la hipótesis nula.
+
+```{r, echo=FALSE, out.width = '110%' }
+knitr::include_graphics("no_normal.png")
+```
+
+*En la práctica apróximadamente normal es suficiente, particularmente con* **_n > 30_**.
+
+
+# ¿QUÉ SON LOS RESIDUALES?
+
+Los residuales de un modelo se refieren a la diferencia entre los valores observados y los valores predichos por ese modelo. El valor predicho en un ANOVA se refiere a la media de cada nivel del efecto "Tratamiento".
+
+```{r, fig.height=6 }
+my_data <- ToothGrowth
+names(my_data) <- c("Peso", "Tratamiento")
+my_data <- my_data[,-3]
+
+my_data$Tratamiento <- factor(my_data$Tratamiento, 
+                             labels = c("Dieta 1", "Control"))
+lm.aov <- lm(Peso ~ Tratamiento, data = my_data)
+
+merged_data <- cbind(my_data, Residuos = residuals(lm.aov), Predichos= fitted.values(lm.aov))
+
+# Filtrar las siguientes cinco observaciones de "Control"
+control_data <- merged_data %>%
+  filter(Tratamiento == "Control") %>%
+  slice(1:5)
+
+# Filtrar las primeras cinco observaciones de "Dieta 1"
+dieta1_data <- merged_data %>%
+  filter(Tratamiento == "Dieta 1") %>%
+  slice(1:5)
+
+# Unir los datos de "Dieta 1" y "Control"
+final_data <- rbind(control_data,dieta1_data)
+
+# Mostrar la tabla formateada con kable
+kable(final_data, digits = 2)
+
+```
+
+
+# MÉTODOS PARA EVALUACIÓN DE SUPUESTOS
+
+**MÉTODO DE LOS RESIDUALES (GRÁFICOS)**  
+Residuo = valor observado - valor predicho  
+$e$ = $y$ - $\hat{y}$ 
+
+**Residuos en ANOVA**
+$$\sum_{i=1}^{n} (y - \hat{y})^2$$
+*Note que la suma de residuos representa la variabilidad no explicada por el modelo.*
+
+
+# MÉTODOS PARA EVALUACIÓN DE SUPUESTOS 2
+
+**MÉTODO MEDIANTE PRUEBAS ESTADÍSTICAS**
+
+- INDEPENDENCIA: DURBIN-WATSON. 
+
+- HOMOGENEIDAD DE VARIANZAS: PRUEBA DE LEVENE. 
+
+- NORMALIDAD: PRUEBA DE SHAPIRO-WILKS.  
+
+**Regla de oro**  
+1.- Primero evalúe independencia.\
+&nbsp;    
+2.- Luego, homogeneidad de varianzas.\
+&nbsp;    
+3.- Finalmente, normalidad.\
+&nbsp;      
+
+# ESTUDIO DE CASO 
+
+```{r, fig.height=6 }
+my_data <- ToothGrowth
+names(my_data) <- c("Peso", "Tratamiento")
+my_data$Tratamiento <- factor(my_data$Tratamiento, 
+                             labels = c("Dieta 1", "Control"))
+```
+
+```{r, echo=FALSE}
+My_Theme = theme(
+  title = element_text(size = 12,face = "bold"),
+  axis.title.x = element_text(size = 12,face = "bold"),
+  axis.text.x = element_text(size = 12,face = "bold"),
+  axis.title.y = element_text(size = 12,face = "bold"),
+  axis.text.y = element_text(size = 12,face = "bold"))
+
+ggplot(my_data, aes(x = Tratamiento, y = Peso, fill=Tratamiento)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("coral", "turquoise"))+
+  labs(x = "Tratamiento", y = "Peso") +
+  ggtitle("Boxplot de Peso por Tratamiento")+
+  theme_bw()+My_Theme
+```
+
+
+# ANOVA
+
+```{r, echo=TRUE}
+lm.aov <- lm(Peso ~ Tratamiento, data = my_data)
+anova(lm.aov) %>% kable(digits = 3)
+```
+
+# INDEPENDENCIA: ANÁLISIS DE RESIDUALES
+
+```{r, echo=TRUE}
+plot(lm.aov$residuals, pch=20, col = "blue",
+     cex.lab=1.25, cex.axis=1.25)
+```
+
+# INDEPENDENCIA: PRUEBA DE DURBIN-WATSON
+
+**Hipótesis**  
+**H~0~**: Son independientes o no existe autocorrelación.   
+**H~A~**: No son independientes y existe autocorrelación.  
+
+```{r, echo=TRUE}
+dwtest(Peso ~ Tratamiento, data = my_data,
+       alternative = c("two.sided"), 
+       iterations = 15) # library(lmtest)
+
+```
+
+# HOMOGENEIDAD DE VARIANZAS: ANÁLISIS DE RESIDUALES
+
+```{r, echo=TRUE,out.width = '85%', fig.align='center'}
+plot(lm.aov, 1, pch=20, col = "blue",
+     cex.lab=1.5, cex.axis=1.5, sub = "")
+```
+
+
+# HOMOGENEIDAD DE VARIANZAS: PRUEBA DE LEVENE
+
+**H~0~**:  $\sigma^2_1$ = $\sigma^2_2$  
+**H~A~**: $\sigma^2_1$ $\neq$ $\sigma^2_2$  
+
+```{r, echo=TRUE}
+lv <- leveneTest(Peso ~ Tratamiento, data = my_data,
+           center = "median") # library(car)  
+lv %>% kable(digits = 3)
+```
+
+# NORMALIDAD: ANÁLISIS DE RESIDUALES
+
+```{r, echo=TRUE}
+plot(lm.aov, 2, pch=20, col = "blue")
+```
+
+# NORMALIDAD: ANÁLISIS DE RESIDUALES 2
+
+
+```{r, echo=TRUE, out.width = '85%'}
+qqPlot(lm.aov) # library(car)
+```
+
+
+# NORMALIDAD: PRUEBA DE SHAPIRO-WILKS
+
+**H~0~**: La distribución es normal.     
+**H~A~**: La distribución no es normal.    
+
+```{r, echo=TRUE}
+aov_residuals <- residuals(object = lm.aov)
+shapiro.test(x= aov_residuals)
+
+```
+
+# PRÁCTICA ANÁLISIS DE DATOS
+
+- El trabajo práctico se realiza en Rstudio.cloud.  
+**Clase 12 - Evaluación de supuestos**
+
+# RESUMEN DE LA CLASE
+
+- **Teoría**
+- Supuestos de los análisis paramétricos.   
+- Consecuencias de la violación de los supuestos.
+- Interpretación de métodos gráficos, análisis de residuos y pruebas de hipótesis para evaluar supuestos.
+
+- **Evaluación de supuestos**
+    * Independencia.  
+    * Homocedasticidad.
+    * Normalidad.
+    
