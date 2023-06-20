@@ -1,0 +1,178 @@
+---
+title: "Guía 16 Modelamiento predictivo: Regresión lineal"
+subtitle: 'Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura.'
+author:
+ name: Dr. José A. Gallardo y Dra. María Angélica Rueda.
+ affiliation: Pontificia Universidad Católica de Valparaíso
+ email: <jose.gallardo@pucv.cl>
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: hide
+  word_document: default
+  pdf_document: default
+---
+
+<style>
+#TOC {
+  color: black;
+  font-familiy: Calibri;
+  font-size: 14px;
+  border-color: #708090; 
+}
+body {
+   color: black;
+   font-familiy: Calibri;
+}
+
+pre {
+  color: black;
+  background-color: #F8F8FF;
+}
+# header {
+  color: #800000;
+  font-familiy: Calibri;
+  background-color: #F5F5F5;
+  opacity: 0.8;
+  font-size: 16px;
+}
+</style>
+
+#### **Objetivos de aprendizaje**
+
+Los objetivos de aprendizaje de esta guía son:
+
+**1**. - Realizar validación leave-one-out a regresión lineal múltiple.
+
+**2**. - Realizar gráficas avanzadas con ggplot2. 
+
+**3**. - Elaborar un reporte dinámico en formato html con **[Rmarkdown](https://rmarkdown.rstudio.com/)**.
+
+#### EJERCICIOS
+
+## ESTUDIO DE CASO: TASA DE ACLARACIÓN (PROXY DE CONSUMO DE PARTÍCULAS).
+[Ver estudio](https://drive.google.com/drive/u/2/folders/1QsVWwO44AT-Wl2nJ5jLV_lDSaB7W4J7d) 
+
+### **Ejercicio 1.** Elaborar y configurar Reporte en formato .Rmd
+
+Elabore un documento .Rmd y configure su reporte para exportar en html. Instale solo los paquetes que utilice para el análisis de los datos.
+
+```{r setup, include=TRUE, warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(readxl)
+library(ggplot2)
+library(dplyr)
+library(multcomp)
+library(psych)
+library(car)
+library(caret)
+library(lmtest)
+library(pander)
+library(ggpmisc)
+library(gridExtra)
+library(ggpubr)
+library(knitr)
+
+```
+
+Ejecute cada uno de los siguientes ejercicios en uno o más bloques de códigos diferentes. Sea ordenado y documente su reporte adecuadamente.
+
+### **Ejercicio 2.** Modelamiento predictivo.
+
+Importe el set de datos **ParticleClearance.xlsx** que está en la hoja 1, nombre el objeto como clearance. Transformar a factor la variable Sample. 
+
+Realizar: 
+
+**a).** Seleccione las variables **time,sample, microparticle_concentration, log_microparticle_concentration** de la base de datos clearance.
+
+```{r, warning=FALSE, message=FALSE}
+
+# Cargar la base de datos
+clearance <-  read_excel("ParticleClearance.xlsx", sheet = 1)
+clearance$sample <- as.factor(clearance$sample)
+
+
+clearance <- clearance[, c("time","sample","microparticle_concentration","log_microparticle_concentration")]
+```
+
+**b).** Ajuste el modelo de regresión múltiple con lm(). Donde la variable respuesta es log_microparticle_concentration y las variables predictoras son time, sample e interacción time*sample. Llame al modelo lm.full
+
+```{r, warning=FALSE, message=FALSE}
+
+lm.full <- lm(log_microparticle_concentration 
+              ~ time + sample+ time*sample, 
+              data = clearance)
+```
+
+**c).** Generar vector vacío para guardar los resultados de la validación leave-one-out.
+
+```{r}
+validation_results <- vector("numeric", length = nrow(clearance))
+```
+
+**d).** Realizar validación leave-one-out.
+
+```{r}
+for (i in 1:nrow(clearance)) {
+  # Obtener el conjunto de entrenamiento
+  train_data <- clearance[-i, ]
+  
+  # Obtener el conjunto de prueba
+  test_data <- clearance[i, ]
+  
+  # Ajustar el modelo de regresión múltiple en el conjunto de entrenamiento
+  lm_model <- lm(log_microparticle_concentration ~ time*sample + time + sample, data = train_data)
+  
+  # Realizar predicciones en el conjunto de prueba
+  predictions <- predict(lm_model, newdata = test_data)
+  
+  # Calcular el error de prueba (RMSE)
+  rmse <- sqrt(mean((test_data$log_microparticle_concentration - predictions)^2))
+  
+  # Guardar el error en el vector de resultados
+  validation_results[i] <- rmse
+}
+
+```
+
+
+**e).** Calcule el promedio del RMSEy redondee el valor a dos cifras.
+
+```{r warning=FALSE, message=FALSE}
+
+average_rmse <- round(mean(validation_results),2)
+
+```
+
+**f).** Genere un dataframe con los Fold y los valores de RMSE obtenidos en la validación leave-one-out. 
+
+```{r}
+results_df <- data.frame(Fold = 1:nrow(clearance), RMSE = validation_results)
+```
+
+**c).** Realice un gráfico de líneas y puntos con ggplot2. Donde en el eje x estén los Folds y en el eje y estén los valores de RMSE de la validación leave-one-out. Además, que muestre con líneas punteadas rojas el promedio del RMSE. Exporte la figura como archivo .jpeg.
+
+```{r}
+#jpeg(file = "LOO.jpg", 
+#     width = 60, height = 20,  
+#     units = "cm",             
+#     quality = 95,            
+#     res = 300)
+ggplot(results_df, aes(x = Fold, y = RMSE)) +
+  geom_line() +
+  geom_point() +
+  geom_hline(yintercept = average_rmse, linetype = "dashed", color = "red") +
+  xlab("Fold") +
+  ylab("RMSE") +
+  ggtitle("Valores de RMSE en Validación Leave-One-Out") +
+  theme_bw() +
+  theme(plot.title = element_text(size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        axis.text = element_text(size = 12))
+
+#dev.off()
+```
+
