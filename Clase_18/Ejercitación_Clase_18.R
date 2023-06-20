@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------------------------------------
 # Clase 18 - Script Modelamiento predictivo: Regresión logistica
 # Dr. José Gallardo Matus, Dra. María Angélica Rueda Calderón
-# 17 de junio 2023
+# 20 de junio 2023
 # Diplomado en Análisis de Datos y Modelamiento Predictivo con Aprendizaje Automático para la Acuicultura
 # ------------------------------------------------------------------------------------------------------------
 
