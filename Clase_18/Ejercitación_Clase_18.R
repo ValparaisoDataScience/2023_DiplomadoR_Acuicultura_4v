@@ -67,6 +67,7 @@ colnames(matriz_confusion_df) <- c("Observado 0", "Observado 1")
 
 # Mostrar la matriz de confusión
 kable(matriz_confusion_df)
+table(datos_prueba$Maturation)
 
 exactitud <- sum(diag(matriz_confusion)) / sum(matriz_confusion)
 precision <- matriz_confusion[2, 2] / sum(matriz_confusion[, 2])
@@ -76,14 +77,14 @@ especificidad <- matriz_confusion[1, 1] / sum(matriz_confusion[1, ])
 # Imprimir métricas de evaluación
 cat("Matriz de confusión:\n")
 print(matriz_confusion)
-cat("\nExactitud:", exactitud)
+cat("\nExactitud:", round(exactitud,2))
 cat("\nPrecisión:", precision)
 cat("\nSensibilidad (Recall):", sensibilidad)
 cat("\nEspecificidad:", especificidad)
 
 # Predicciones en los datos de prueba
 datos_prueba$Probabilidad <- predict(mod_logit, newdata = datos_prueba, type = "response")
-
+datos_prueba$clases_predichas <- clases_predichas
 # Crear un gráfico de dispersión con puntos coloreados según la probabilidad
 ggplot(datos_prueba, aes(x = Mass, y = Maturation, color = Probabilidad)) +
   geom_point() +
@@ -95,7 +96,7 @@ ggplot(datos_prueba, aes(x = Mass, y = Maturation, color = Probabilidad)) +
   theme_minimal()+ My_Theme
 
 # Crear objeto de curva ROC
-roc_obj <- roc(datos_prueba$Maturation, datos_prueba$Probabilidad)
+roc_obj <- roc(datos_prueba$Maturation, datos_prueba$)
 
 # Obtener datos de sensibilidad y especificidad
 roc_data <- coords(roc_obj, "all")
