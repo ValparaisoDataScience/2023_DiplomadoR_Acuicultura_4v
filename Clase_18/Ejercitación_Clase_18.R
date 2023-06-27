@@ -82,7 +82,7 @@ cat("\nPrecisión:", precision)
 cat("\nSensibilidad (Recall):", sensibilidad)
 cat("\nEspecificidad:", especificidad)
 
-# Agrego la columnas llamas Probabilidad y Clases_predichas a la base de datos de prueba
+# Agrego la columnas llamadas Probabilidad y Clases_predichas a la base de datos de prueba
 datos_prueba$Probabilidad <- predict(mod_logit, newdata = datos_prueba, type = "response")
 datos_prueba$clases_predichas <- clases_predichas
 
