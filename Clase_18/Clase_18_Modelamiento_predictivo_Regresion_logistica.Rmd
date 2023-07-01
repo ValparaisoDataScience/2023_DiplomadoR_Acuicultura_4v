@@ -213,8 +213,10 @@ knitr::include_graphics("matrix_conf.png")
 
 ```{r, message=FALSE, out.width = '70%', fig.align='center', echo=FALSE, warning=FALSE, error=FALSE, message=FALSE}
 
+datos_prueba$clases_predichas <- clases_predichas
+
 # Crear objeto de curva ROC
-roc_obj <- roc(datos_prueba$Maturation, datos_prueba$Probabilidad)
+roc_obj <- roc(datos_prueba$Maturation, datos_prueba$clases_predichas)
 
 # Obtener datos de sensibilidad y especificidad
 roc_data <- coords(roc_obj, "all")
