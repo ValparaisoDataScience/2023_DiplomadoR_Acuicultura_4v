@@ -73,7 +73,7 @@ pander(Splits)
 # Crear el gráfico de dispersión con el valor del split
 ggplot(datos_1, aes(x = Mass, y = reorder(Maturation, desc(Maturation)))) +
   geom_point(aes(color = factor(Maturation)), size = 3) +
-  geom_vline(xintercept = 248, linetype = "dashed", color = "red") +
+  geom_vline(xintercept = modelo_arbol[["splits"]][4], linetype = "dashed", color = "red") +
   scale_y_discrete(breaks = c(1, 0), labels = c("Si Madura", "No Madura")) +
   scale_color_manual(values = c("coral", "darkblue"),
                      labels = c("Si Madura", "No Madura")) +
@@ -86,6 +86,8 @@ ggplot(datos_1, aes(x = Mass, y = reorder(Maturation, desc(Maturation)))) +
 rpart.plot(modelo_arbol, type=4,extra = 1)
 
 rpart.plot(modelo_arbol, type=4,extra = 2)
+
+rpart.plot(modelo_arbol, type=4,extra = 106)
 
 # Crear la matriz de confusión
 matriz_confusion <- confusionMatrix(predicciones, test_data$Maturation)
@@ -208,7 +210,7 @@ tune_grid_rf <- expand.grid(mtry = c(2, 3, 4))
 
 # Ajustar el modelo Random Forest con búsqueda de parámetros y validación cruzada
 set.seed(123)
-modelo_rf <- train(Maturation ~  Mass + SGR + Length + GSI, data = train_data, method = "rf",
+modelo_rf <- train(Maturation ~  Mass + SGR + Length + GSI, data = datos_1, method = "rf",
                    trControl = trainControl(method = "cv", number = 5),
                    tuneGrid = tune_grid_rf, importance=TRUE,ntree=1000)
 
